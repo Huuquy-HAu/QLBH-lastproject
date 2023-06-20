@@ -29,7 +29,9 @@ namespace QLBH_lastproject
 
         private void trangchu_Click(object sender, EventArgs e)
         {
-            this.Refresh();
+            FUserInfor fUserInfor = new FUserInfor();
+            this.Hide();
+            fUserInfor.ShowDialog();
         }
 
         private void huy_Click(object sender, EventArgs e)
@@ -45,10 +47,10 @@ namespace QLBH_lastproject
             {
                 this.Close();
             }
-            else if (dialogResult == DialogResult.Cancel) 
+            else if (dialogResult == DialogResult.Cancel)
             {
                 dialogResult = DialogResult.Cancel;
-                
+
             }
         }
 

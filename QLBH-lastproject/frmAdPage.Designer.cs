@@ -63,7 +63,7 @@
             label1.Font = new Font("Microsoft JhengHei", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(25, 15);
             label1.Name = "label1";
-            label1.Size = new Size(152, 27);
+            label1.Size = new Size(194, 34);
             label1.TabIndex = 1;
             label1.Text = "Trang quản trị";
             // 
@@ -191,7 +191,7 @@
             pnlMain.Size = new Size(1190, 500);
             pnlMain.TabIndex = 2;
             // 
-            // Form1
+            // frmAdPage
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.White;
@@ -202,7 +202,7 @@
             Font = new Font("Microsoft JhengHei", 15F, FontStyle.Bold, GraphicsUnit.Point);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Form1";
+            Name = "frmAdPage";
             Padding = new Padding(5);
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
