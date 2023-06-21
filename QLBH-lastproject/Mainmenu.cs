@@ -17,8 +17,58 @@ namespace QLBH_lastproject
         public Mainmenu()
         {
             InitializeComponent();
+            for (int i = 0; i < 10; i++)
+            {
+                ceat_cartprs();
+
+            }
+        }
+        private void ceat_cartprs()
+        {
+            Panel penl = new Panel();
+            //penl.Size = new Size(153, 210);
+            penl.BackColor = SystemColors.Control;
+            penl.SetBounds(10, 5, 155, 210);
+
+            PictureBox pictureBox = new PictureBox();
+            // pictureBox.Size = new Size(140, 140);
+            Image myimage = new Bitmap(@"C:\Users\ASUS\Pictures\langbac.jpg");
+            pictureBox.Click += Item_Click;
+            pictureBox.BackgroundImage = myimage;
+            pictureBox.SetBounds(5, 4, 140, 140);
+
+            Label namePrs = new Label();
+            namePrs.Text = "Iphone 14 Pro Max";
+            namePrs.SetBounds(7, 151, 140, 15);
+            namePrs.Click += Item_Click;
+            Label pricePrs = new Label();
+            pricePrs.Text = "21.000.000";
+            pricePrs.SetBounds(7, 184, 140, 15);
+            pricePrs.Click += Item_Click;
+
+            Button btn_Add = new Button();
+            btn_Add.Text = "Add";
+            btn_Add.SetBounds(106, 169, 40, 40);
+            btn_Add.Click += Item_Click;
+
+            penl.Click += Item_Click;
+
+            penl.Controls.Add(btn_Add);
+            penl.Controls.Add(pictureBox);
+            penl.Controls.Add(namePrs);
+            penl.Controls.Add(pricePrs);
+
+            flowLayoutPanel1.Controls.Add(penl);
+
         }
 
+        private void Item_Click(object sender, EventArgs e)
+        {
+            /* InfoPros ifo = new InfoPros();
+             //flowLayoutPanel1.Controls.Clear();
+             this.Controls.Add(ifo);
+             ifo.BringToFront();*/
+        }
         private void giohang_Click(object sender, EventArgs e)
         {
             Cart cart = new Cart();
@@ -26,6 +76,7 @@ namespace QLBH_lastproject
             cart.BringToFront();
             this.Hide();
         }
+
 
         private void trangchu_Click(object sender, EventArgs e)
         {
