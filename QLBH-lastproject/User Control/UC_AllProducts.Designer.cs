@@ -30,8 +30,15 @@
         {
             label1 = new Label();
             dataGridView1 = new DataGridView();
+            clProductId = new DataGridViewTextBoxColumn();
+            clProductName = new DataGridViewTextBoxColumn();
+            clDescription = new DataGridViewTextBoxColumn();
+            clQuantity = new DataGridViewTextBoxColumn();
+            clPrice = new DataGridViewTextBoxColumn();
             pnlProductDetail = new Panel();
-            txtTotal = new TextBox();
+            txtProID = new TextBox();
+            label2 = new Label();
+            txtDescription = new TextBox();
             txtPrice = new TextBox();
             txtQuantity = new TextBox();
             txtName = new TextBox();
@@ -57,23 +64,70 @@
             label1.ForeColor = Color.WhiteSmoke;
             label1.Location = new Point(12, 10);
             label1.Name = "label1";
-            label1.Size = new Size(220, 34);
+            label1.Size = new Size(285, 43);
             label1.TabIndex = 0;
             label1.Text = "Trang sản phẩm";
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { clProductId, clProductName, clDescription, clQuantity, clPrice });
             dataGridView1.Location = new Point(61, 76);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(693, 395);
+            dataGridView1.Size = new Size(767, 395);
             dataGridView1.TabIndex = 1;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // clProductId
+            // 
+            clProductId.DataPropertyName = "productID";
+            clProductId.HeaderText = "Mã sản phẩm";
+            clProductId.MinimumWidth = 6;
+            clProductId.Name = "clProductId";
+            clProductId.ReadOnly = true;
+            clProductId.Resizable = DataGridViewTriState.False;
+            clProductId.Width = 125;
+            // 
+            // clProductName
+            // 
+            clProductName.DataPropertyName = "productName";
+            clProductName.HeaderText = "Tên sản phẩm";
+            clProductName.MinimumWidth = 6;
+            clProductName.Name = "clProductName";
+            clProductName.Width = 160;
+            // 
+            // clDescription
+            // 
+            clDescription.DataPropertyName = "description";
+            clDescription.HeaderText = "Mô tả";
+            clDescription.MinimumWidth = 6;
+            clDescription.Name = "clDescription";
+            clDescription.Width = 160;
+            // 
+            // clQuantity
+            // 
+            clQuantity.DataPropertyName = "quantity";
+            clQuantity.HeaderText = "Số lượng";
+            clQuantity.MinimumWidth = 6;
+            clQuantity.Name = "clQuantity";
+            clQuantity.Width = 120;
+            // 
+            // clPrice
+            // 
+            clPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            clPrice.DataPropertyName = "price";
+            clPrice.HeaderText = "Giá";
+            clPrice.MinimumWidth = 6;
+            clPrice.Name = "clPrice";
             // 
             // pnlProductDetail
             // 
             pnlProductDetail.BackColor = Color.WhiteSmoke;
-            pnlProductDetail.Controls.Add(txtTotal);
+            pnlProductDetail.Controls.Add(txtProID);
+            pnlProductDetail.Controls.Add(label2);
+            pnlProductDetail.Controls.Add(txtDescription);
             pnlProductDetail.Controls.Add(txtPrice);
             pnlProductDetail.Controls.Add(txtQuantity);
             pnlProductDetail.Controls.Add(txtName);
@@ -81,72 +135,99 @@
             pnlProductDetail.Controls.Add(label5);
             pnlProductDetail.Controls.Add(label4);
             pnlProductDetail.Controls.Add(label3);
-            pnlProductDetail.Location = new Point(777, 76);
+            pnlProductDetail.Location = new Point(834, 76);
             pnlProductDetail.Name = "pnlProductDetail";
-            pnlProductDetail.Size = new Size(361, 316);
+            pnlProductDetail.Size = new Size(304, 316);
             pnlProductDetail.TabIndex = 2;
             // 
-            // txtTotal
+            // txtProID
             // 
-            txtTotal.Location = new Point(192, 261);
-            txtTotal.Name = "txtTotal";
-            txtTotal.Size = new Size(152, 43);
-            txtTotal.TabIndex = 9;
+            txtProID.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtProID.Location = new Point(132, 15);
+            txtProID.Name = "txtProID";
+            txtProID.ReadOnly = true;
+            txtProID.Size = new Size(152, 34);
+            txtProID.TabIndex = 11;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(18, 18);
+            label2.Name = "label2";
+            label2.Size = new Size(70, 25);
+            label2.TabIndex = 10;
+            label2.Text = "Mã SP";
+            // 
+            // txtDescription
+            // 
+            txtDescription.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtDescription.Location = new Point(132, 267);
+            txtDescription.Name = "txtDescription";
+            txtDescription.Size = new Size(152, 34);
+            txtDescription.TabIndex = 9;
             // 
             // txtPrice
             // 
-            txtPrice.Location = new Point(192, 200);
+            txtPrice.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtPrice.Location = new Point(132, 203);
             txtPrice.Name = "txtPrice";
-            txtPrice.Size = new Size(152, 43);
+            txtPrice.Size = new Size(152, 34);
             txtPrice.TabIndex = 8;
             // 
             // txtQuantity
             // 
-            txtQuantity.Location = new Point(192, 121);
+            txtQuantity.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtQuantity.Location = new Point(132, 132);
             txtQuantity.Name = "txtQuantity";
-            txtQuantity.Size = new Size(152, 43);
+            txtQuantity.Size = new Size(152, 34);
             txtQuantity.TabIndex = 7;
             // 
             // txtName
             // 
-            txtName.Location = new Point(192, 35);
+            txtName.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtName.Location = new Point(132, 69);
             txtName.Name = "txtName";
-            txtName.Size = new Size(152, 43);
+            txtName.Size = new Size(152, 34);
             txtName.TabIndex = 6;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(15, 261);
+            label6.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Location = new Point(13, 270);
             label6.Name = "label6";
-            label6.Size = new Size(79, 34);
+            label6.Size = new Size(67, 25);
             label6.TabIndex = 4;
-            label6.Text = "Tổng";
+            label6.Text = "Mô tả";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(15, 200);
+            label5.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(18, 206);
             label5.Name = "label5";
-            label5.Size = new Size(57, 34);
+            label5.Size = new Size(43, 25);
             label5.TabIndex = 3;
             label5.Text = "Giá";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(15, 124);
+            label4.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(18, 141);
             label4.Name = "label4";
-            label4.Size = new Size(125, 34);
+            label4.Size = new Size(91, 25);
             label4.TabIndex = 2;
             label4.Text = "Số lượng";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(15, 35);
+            label3.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(18, 72);
             label3.Name = "label3";
-            label3.Size = new Size(61, 34);
+            label3.Size = new Size(46, 25);
             label3.TabIndex = 1;
             label3.Text = "Tên";
             // 
@@ -156,9 +237,9 @@
             pnlBtn.Controls.Add(btnDelProduct);
             pnlBtn.Controls.Add(btnUpdateProduct);
             pnlBtn.Controls.Add(btnAddProduct);
-            pnlBtn.Location = new Point(777, 409);
+            pnlBtn.Location = new Point(834, 409);
             pnlBtn.Name = "pnlBtn";
-            pnlBtn.Size = new Size(361, 62);
+            pnlBtn.Size = new Size(304, 62);
             pnlBtn.TabIndex = 3;
             // 
             // btnDelProduct
@@ -166,39 +247,42 @@
             btnDelProduct.BackColor = Color.Silver;
             btnDelProduct.FlatAppearance.BorderSize = 0;
             btnDelProduct.FlatStyle = FlatStyle.Flat;
-            btnDelProduct.Font = new Font("Microsoft JhengHei", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            btnDelProduct.Location = new Point(259, 16);
+            btnDelProduct.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDelProduct.Location = new Point(205, 16);
             btnDelProduct.Name = "btnDelProduct";
             btnDelProduct.Size = new Size(95, 33);
             btnDelProduct.TabIndex = 2;
             btnDelProduct.Text = "Xóa";
             btnDelProduct.UseVisualStyleBackColor = false;
+            btnDelProduct.Click += btnDelProduct_Click;
             // 
             // btnUpdateProduct
             // 
             btnUpdateProduct.BackColor = Color.Silver;
             btnUpdateProduct.FlatAppearance.BorderSize = 0;
             btnUpdateProduct.FlatStyle = FlatStyle.Flat;
-            btnUpdateProduct.Font = new Font("Microsoft JhengHei", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            btnUpdateProduct.Location = new Point(133, 16);
+            btnUpdateProduct.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnUpdateProduct.Location = new Point(104, 16);
             btnUpdateProduct.Name = "btnUpdateProduct";
             btnUpdateProduct.Size = new Size(95, 33);
             btnUpdateProduct.TabIndex = 1;
             btnUpdateProduct.Text = "Sửa";
             btnUpdateProduct.UseVisualStyleBackColor = false;
+            btnUpdateProduct.Click += btnUpdateProduct_Click;
             // 
             // btnAddProduct
             // 
             btnAddProduct.BackColor = Color.Silver;
             btnAddProduct.FlatAppearance.BorderSize = 0;
             btnAddProduct.FlatStyle = FlatStyle.Flat;
-            btnAddProduct.Font = new Font("Microsoft JhengHei", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            btnAddProduct.Location = new Point(5, 16);
+            btnAddProduct.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAddProduct.Location = new Point(3, 16);
             btnAddProduct.Name = "btnAddProduct";
             btnAddProduct.Size = new Size(95, 33);
             btnAddProduct.TabIndex = 0;
             btnAddProduct.Text = "Thêm";
             btnAddProduct.UseVisualStyleBackColor = false;
+            btnAddProduct.Click += btnAddProduct_Click;
             // 
             // panel1
             // 
@@ -251,7 +335,7 @@
         private DataGridView dataGridView1;
         private Panel pnlProductDetail;
         private Panel pnlBtn;
-        private TextBox txtTotal;
+        private TextBox txtDescription;
         private TextBox txtPrice;
         private TextBox txtQuantity;
         private TextBox txtName;
@@ -264,5 +348,12 @@
         private Button btnAddProduct;
         private Panel panel1;
         private Button btnClose;
+        private DataGridViewTextBoxColumn clProductId;
+        private DataGridViewTextBoxColumn clProductName;
+        private DataGridViewTextBoxColumn clDescription;
+        private DataGridViewTextBoxColumn clQuantity;
+        private DataGridViewTextBoxColumn clPrice;
+        private TextBox txtProID;
+        private Label label2;
     }
 }
