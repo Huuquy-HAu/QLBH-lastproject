@@ -16,5 +16,10 @@ namespace QLBH_lastproject
         {
             InitializeComponent();
         }
+
+        private void FUserInfor_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

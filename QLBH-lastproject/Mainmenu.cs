@@ -1,8 +1,11 @@
-﻿using QLBH_lastproject.UC_Function;
+﻿using Microsoft.VisualBasic.Devices;
+using QLBH_lastproject.ConnectSql;
+using QLBH_lastproject.UC_Function;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,18 +20,21 @@ namespace QLBH_lastproject
         public Mainmenu()
         {
             InitializeComponent();
-            for (int i = 0; i < 10; i++)
+            SqlData bd = new SqlData();
+            DataTable dt = bd.Seclection();
+            foreach (DataRow row in dt.Rows)
             {
-                ceat_cartprs();
-
+                ceat_cartprs(row["productName"].ToString(), row["price"].ToString(), row["productID"].ToString());
             }
         }
-        private void ceat_cartprs()
+        private void ceat_cartprs(string name , string price ,string id)
         {
             Panel penl = new Panel();
             //penl.Size = new Size(153, 210);
-            penl.BackColor = SystemColors.Control;
+            //penl.BackColor = SystemColors.Control;
+            penl.BackColor = Color.Red;
             penl.SetBounds(10, 5, 155, 210);
+            penl.Name = id;
 
             PictureBox pictureBox = new PictureBox();
             // pictureBox.Size = new Size(140, 140);
@@ -36,13 +42,15 @@ namespace QLBH_lastproject
             pictureBox.Click += Item_Click;
             pictureBox.BackgroundImage = myimage;
             pictureBox.SetBounds(5, 4, 140, 140);
+            pictureBox.Name = id;
 
             Label namePrs = new Label();
-            namePrs.Text = "Iphone 14 Pro Max";
+            namePrs.Text = name;
             namePrs.SetBounds(7, 151, 140, 15);
             namePrs.Click += Item_Click;
             Label pricePrs = new Label();
-            pricePrs.Text = "21.000.000";
+            string a = string.Format("{0:0,0}", int.Parse(price));
+            pricePrs.Text = a + " VND";
             pricePrs.SetBounds(7, 184, 140, 15);
             pricePrs.Click += Item_Click;
 
@@ -62,12 +70,16 @@ namespace QLBH_lastproject
 
         }
 
-        private void Item_Click(object sender, EventArgs e)
+        private void Item_Click(object sender, EventArgs e )
         {
-            /* InfoPros ifo = new InfoPros();
-             //flowLayoutPanel1.Controls.Clear();
-             this.Controls.Add(ifo);
-             ifo.BringToFront();*/
+            //int n = int.Parse(flowLayoutPanel1.Controls[0].Name);
+            PictureBox clickPanel = (PictureBox)sender;
+            string a = clickPanel.Name;
+
+            InfoProduct ifo = new InfoProduct(int.Parse(a));
+            ////flowLayoutPanel1.Controls.Clear();
+            ifo.Show();
+            ifo.BringToFront();
         }
         private void giohang_Click(object sender, EventArgs e)
         {

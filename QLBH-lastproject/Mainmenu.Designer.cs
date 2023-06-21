@@ -181,6 +181,7 @@
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Mainmenu";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Mainmenu";
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
