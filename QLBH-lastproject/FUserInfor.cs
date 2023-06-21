@@ -21,5 +21,11 @@ namespace QLBH_lastproject
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            new Mainmenu().Show();
+        }
     }
 }

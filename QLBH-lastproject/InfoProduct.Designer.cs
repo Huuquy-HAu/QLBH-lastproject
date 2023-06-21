@@ -59,10 +59,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.ForeColor = SystemColors.ControlText;
             label2.Location = new Point(280, 109);
             label2.Name = "label2";
-            label2.Size = new Size(28, 17);
+            label2.Size = new Size(45, 30);
             label2.TabIndex = 1;
             label2.Text = "Tên";
             // 
@@ -78,6 +79,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = Color.OrangeRed;
             label3.Location = new Point(280, 145);
             label3.Name = "label3";
             label3.Size = new Size(27, 17);
@@ -148,21 +150,27 @@
             // 
             // button1
             // 
+            button1.BackColor = Color.OrangeRed;
+            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.ForeColor = SystemColors.ControlLightLight;
             button1.Location = new Point(125, 373);
             button1.Name = "button1";
             button1.Size = new Size(123, 23);
             button1.TabIndex = 10;
             button1.Text = "Thêm vào giỏ hàng";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             // 
             // button2
             // 
+            button2.BackColor = Color.OrangeRed;
+            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.ForeColor = SystemColors.ControlLightLight;
             button2.Location = new Point(393, 373);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 11;
             button2.Text = "Mua ngay";
-            button2.UseVisualStyleBackColor = true;
+            button2.UseVisualStyleBackColor = false;
             // 
             // label10
             // 

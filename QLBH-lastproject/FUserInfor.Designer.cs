@@ -28,20 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
+            button1 = new Button();
             SuspendLayout();
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.ForeColor = Color.Red;
+            button1.Location = new Point(731, 1);
+            button1.Name = "button1";
+            button1.Size = new Size(45, 39);
+            button1.TabIndex = 0;
+            button1.Text = "X";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // FUserInfor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(778, 460);
+            Controls.Add(button1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FUserInfor";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FUserInfor";
             Load += FUserInfor_Load;
             ResumeLayout(false);
         }
 
         #endregion
+
+        private Button button1;
     }
 }

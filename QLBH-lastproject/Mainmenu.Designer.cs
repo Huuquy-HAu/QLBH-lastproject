@@ -35,6 +35,10 @@
             giohang = new Button();
             btnUserInfor = new Button();
             panel2 = new Panel();
+            button4 = new Button();
+            button3 = new Button();
+            button2 = new Button();
+            button1 = new Button();
             huy = new Button();
             timkiem = new Button();
             textBox1 = new TextBox();
@@ -124,20 +128,62 @@
             // 
             // panel2
             // 
+            panel2.BackColor = SystemColors.ScrollBar;
+            panel2.Controls.Add(button4);
+            panel2.Controls.Add(button3);
+            panel2.Controls.Add(button2);
+            panel2.Controls.Add(button1);
             panel2.Controls.Add(huy);
             panel2.Controls.Add(timkiem);
             panel2.Controls.Add(textBox1);
-            panel2.Location = new Point(205, -14);
+            panel2.Location = new Point(206, 12);
             panel2.Name = "panel2";
             panel2.Size = new Size(725, 76);
             panel2.TabIndex = 4;
             // 
+            // button4
+            // 
+            button4.Location = new Point(274, 28);
+            button4.Name = "button4";
+            button4.Size = new Size(75, 23);
+            button4.TabIndex = 6;
+            button4.Text = "OPPO";
+            button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(187, 28);
+            button3.Name = "button3";
+            button3.Size = new Size(66, 24);
+            button3.TabIndex = 5;
+            button3.Text = "Nokia";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(103, 28);
+            button2.Name = "button2";
+            button2.Size = new Size(64, 24);
+            button2.TabIndex = 4;
+            button2.Text = "Apple";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(14, 28);
+            button1.Name = "button1";
+            button1.Size = new Size(70, 24);
+            button1.TabIndex = 3;
+            button1.Text = "Samsung";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // huy
             // 
             huy.ForeColor = SystemColors.Highlight;
-            huy.Location = new Point(549, 28);
+            huy.Location = new Point(639, 25);
             huy.Name = "huy";
-            huy.Size = new Size(86, 31);
+            huy.Size = new Size(66, 27);
             huy.TabIndex = 2;
             huy.Text = "Hủy";
             huy.UseVisualStyleBackColor = true;
@@ -147,28 +193,29 @@
             // 
             timkiem.BackColor = SystemColors.Highlight;
             timkiem.ForeColor = SystemColors.ButtonHighlight;
-            timkiem.Location = new Point(447, 26);
+            timkiem.Location = new Point(558, 25);
             timkiem.Name = "timkiem";
-            timkiem.Size = new Size(96, 34);
+            timkiem.Size = new Size(75, 31);
             timkiem.TabIndex = 1;
             timkiem.Text = "Tìm";
             timkiem.UseVisualStyleBackColor = false;
+            timkiem.Click += timkiem_Click;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(15, 26);
+            textBox1.Location = new Point(398, 28);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(414, 35);
+            textBox1.Size = new Size(154, 26);
             textBox1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Location = new Point(220, 109);
+            flowLayoutPanel1.Location = new Point(220, 100);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(710, 486);
+            flowLayoutPanel1.Size = new Size(710, 495);
             flowLayoutPanel1.TabIndex = 5;
             // 
             // Mainmenu
@@ -201,5 +248,9 @@
         private Button timkiem;
         private TextBox textBox1;
         private FlowLayoutPanel flowLayoutPanel1;
+        private Button button1;
+        private Button button3;
+        private Button button2;
+        private Button button4;
     }
 }

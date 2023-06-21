@@ -1,3 +1,4 @@
+using QLBH_lastproject;
 using WinFormsApp1.UC;
 
 namespace WinFormsApp1
@@ -45,12 +46,18 @@ namespace WinFormsApp1
         }
         private void btnCLose_Click(object sender, EventArgs e)
         {
+            
             DialogResult dialogResult;
             dialogResult = MessageBox.Show("Are you sure to close this?", "CLose Message", MessageBoxButtons.OK, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.OK)
             {
+
                 this.Close();
+                Mainmenu mainmenu = new Mainmenu();
+                mainmenu.Show();
             }
+
+            
         }
     }
 }

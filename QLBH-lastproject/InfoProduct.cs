@@ -16,10 +16,14 @@ namespace QLBH_lastproject
         public InfoProduct(int n)
         {
             InitializeComponent();
-            
+
             // pictureBox.Size = new Size(140, 140);
-            Image myimage = new Bitmap(@"C:\Users\ASUS\Pictures\langbac.jpg");
-            pictureBox1.BackgroundImage = myimage;
+            FileStream fs = new System.IO.FileStream(@"C:\Users\ASUS\Source\Repos\QLBH-lastproject\QLBH-lastproject\img\" + n + ".bmp", FileMode.Open, FileAccess.Read);
+
+            pictureBox1.Image = Image.FromStream(fs);
+
+            fs.Close();
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             label2.Text = n.ToString();
             SqlData sql = new SqlData();
             DataTable dt = sql.Seclection(n);
@@ -28,7 +32,7 @@ namespace QLBH_lastproject
             label2.Text = dataRow["productName"].ToString();
             string a = string.Format("{0:0,0}", int.Parse(dataRow["price"].ToString()));
             label3.Text = a + " VND";
-            
+
             GetProDetail(n);
         }
 
@@ -38,8 +42,7 @@ namespace QLBH_lastproject
             //label2.Text = n.ToString();
             SqlData sql = new SqlData();
             DataTable ds = sql.Seclections(n);
-            DataRow dataRows = ds.Rows[0];   
-
+            DataRow dataRows = ds.Rows[0];
             label11.Text = dataRows["Ram"].ToString();
             label12.Text = dataRows["Rom"].ToString();
         }

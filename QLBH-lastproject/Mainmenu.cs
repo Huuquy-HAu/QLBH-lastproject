@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -20,29 +21,42 @@ namespace QLBH_lastproject
         public Mainmenu()
         {
             InitializeComponent();
-            SqlData bd = new SqlData();
-            DataTable dt = bd.Seclection();
+            //SqlData bd = new SqlData();
+            Load_Data();
+        }
+        private void Load_Data()
+        {
+            DataTable dt = new SqlData().Seclection();
             foreach (DataRow row in dt.Rows)
             {
                 ceat_cartprs(row["productName"].ToString(), row["price"].ToString(), row["productID"].ToString());
             }
         }
-        private void ceat_cartprs(string name , string price ,string id)
+        private void ceat_cartprs(string name, string price, string id)
         {
             Panel penl = new Panel();
             //penl.Size = new Size(153, 210);
             //penl.BackColor = SystemColors.Control;
-            penl.BackColor = Color.Red;
+            penl.BackColor = SystemColors.ButtonShadow;
             penl.SetBounds(10, 5, 155, 210);
             penl.Name = id;
 
             PictureBox pictureBox = new PictureBox();
             // pictureBox.Size = new Size(140, 140);
-            Image myimage = new Bitmap(@"C:\Users\ASUS\Pictures\langbac.jpg");
+            //Image myimage = new Bitmap("img\iphne.jpg");
+
+            //pictureBox.Image = Image.FromFile();
             pictureBox.Click += Item_Click;
-            pictureBox.BackgroundImage = myimage;
+            //pictureBox.BackgroundImage = myimage;
+            pictureBox.Padding = new Padding(5);
             pictureBox.SetBounds(5, 4, 140, 140);
+            FileStream fs = new System.IO.FileStream(@"C:\Users\ASUS\Source\Repos\QLBH-lastproject\QLBH-lastproject\img\" + id + ".bmp", FileMode.Open, FileAccess.Read);
+
+            pictureBox.Image = Image.FromStream(fs);
+
+            fs.Close();
             pictureBox.Name = id;
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
             Label namePrs = new Label();
             namePrs.Text = name;
@@ -70,7 +84,7 @@ namespace QLBH_lastproject
 
         }
 
-        private void Item_Click(object sender, EventArgs e )
+        private void Item_Click(object sender, EventArgs e)
         {
             //int n = int.Parse(flowLayoutPanel1.Controls[0].Name);
             PictureBox clickPanel = (PictureBox)sender;
@@ -130,6 +144,41 @@ namespace QLBH_lastproject
             account.Show();
             account.BringToFront();
             this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timkiem_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                //if(flowLayoutPanel1 == null)
+                Load_Data();
+            }
+            else
+            {
+                string b = textBox1.Text;
+                string n = b.Substring(0, 1).ToUpper();
+                string m = b.Substring(1);
+                // string s = ;
+                DataTable dt = new SqlData().Seclection();
+                flowLayoutPanel1.Controls.Clear();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    string a = row["productName"].ToString().Trim();
+                    if (a.IndexOf(n + m) >= 0)
+                    {
+                        ceat_cartprs(row["productName"].ToString(), row["price"].ToString(), row["productID"].ToString());
+                    }
+
+                }
+            }
+
+
         }
     }
 }
