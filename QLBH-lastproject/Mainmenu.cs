@@ -149,13 +149,47 @@ namespace QLBH_lastproject
         private void button1_Click(object sender, EventArgs e)
         {
 
+            TimKiem(button1.Text);
         }
 
+        private void TimKiem(string str)
+        {
+            DataTable dt = new SqlData().Seclection();
+            flowLayoutPanel1.Controls.Clear();
+
+
+            foreach (DataRow row in dt.Rows)
+            {
+                string a = row["productName"].ToString().Trim();
+                if (a.IndexOf(str) >= 0)
+                {
+                    ceat_cartprs(row["productName"].ToString(), row["price"].ToString(), row["productID"].ToString());
+                }
+
+            }
+            if (flowLayoutPanel1.Controls.Count == 0)
+            {
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.Size = new Size(300, 300);
+                pictureBox.Margin = new Padding(200, 80, 200, 80);
+                FileStream fs = new System.IO.FileStream(@"C:\Users\ASUS\Source\Repos\QLBH-lastproject\QLBH-lastproject\img\404.jpg", FileMode.Open, FileAccess.Read);
+
+                pictureBox.Image = Image.FromStream(fs);
+
+                fs.Close();
+                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+
+
+                flowLayoutPanel1.Controls.Add(pictureBox);
+
+            }
+        }
         private void timkiem_Click(object sender, EventArgs e)
         {
             if (textBox1.Text == "")
             {
                 //if(flowLayoutPanel1 == null)
+                flowLayoutPanel1.Controls.Clear();
                 Load_Data();
             }
             else
@@ -164,21 +198,31 @@ namespace QLBH_lastproject
                 string n = b.Substring(0, 1).ToUpper();
                 string m = b.Substring(1);
                 // string s = ;
-                DataTable dt = new SqlData().Seclection();
-                flowLayoutPanel1.Controls.Clear();
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    string a = row["productName"].ToString().Trim();
-                    if (a.IndexOf(n + m) >= 0)
-                    {
-                        ceat_cartprs(row["productName"].ToString(), row["price"].ToString(), row["productID"].ToString());
-                    }
-
-                }
+                TimKiem(n + m);
             }
 
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            TimKiem(button2.Text);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            TimKiem(button3.Text);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            TimKiem(button4.Text);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.Controls.Clear();
+            Load_Data();
         }
     }
 }
