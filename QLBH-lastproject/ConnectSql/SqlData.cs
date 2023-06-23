@@ -10,7 +10,7 @@ namespace QLBH_lastproject.ConnectSql
 {
      public class SqlData
      {
-        private string connetionString = "Data Source =localhost;Initial Catalog = QLBH_WPF;User ID = sa;Password = 12345";
+        private string connetionString = @"Data Source=.\sqlexpress;Initial Catalog=QLBH_WPF;Integrated Security=True";
         private SqlConnection conn;
         private string sql;
         private SqlCommand cmd;
