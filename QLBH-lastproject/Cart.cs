@@ -1,4 +1,5 @@
-﻿using QLBH_lastproject.UC_Function;
+﻿using QLBH_lastproject.ConnectSql;
+using QLBH_lastproject.UC_Function;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,8 @@ namespace QLBH_lastproject
     {
         SqlConnection conn;
         SqlCommand cmd;
-
+        SqlData data;
+        getCart getcart;
         string str = "Data Source=NTT0701\\SQLEXPRESS;Initial Catalog=QLBH_WPF;Integrated Security=True; TrustServerCertificate=true";
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataTable table = new DataTable();
@@ -53,7 +55,8 @@ namespace QLBH_lastproject
         }
         private void Cart_Load_1(object sender, EventArgs e)
         {
-
+            data = new SqlData();
+            dataGridView1.DataSource = data.getallCart();
             conn = new SqlConnection(str);
             conn.Open();
             loadData();
@@ -90,10 +93,24 @@ namespace QLBH_lastproject
 
         private void thembtn_Click_1(object sender, EventArgs e)
         {
-            cmd = conn.CreateCommand();
-            cmd.CommandText = "insert into dbo.Cart values('" + textBox1.Text + "', '" + textBox2.Text + "', '" + textBox3.Text + "','" + textBox4.Text + "')";
-            cmd.ExecuteNonQuery();
-            loadData();
+            int cartid = int.Parse(textBox1.Text);
+            int userid = int.Parse(textBox2.Text);
+            int createat = int.Parse(textBox3.Text);
+            int orderid = int.Parse(textBox4.Text);
+            getcart = new getCart(cartid, userid, createat, orderid);
+            if (SqlData.Insertcart)
+            {
+                dataGridView1.DataSource = data.getallCart();
+            }
+            else
+            {
+                MessageBox.Show("Xay ra loi : ", "Khong sua duoc", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //cmd = conn.CreateCommand();
+            //cmd.CommandText = "insert into dbo.Cart values('" + textBox1.Text + "', '" + textBox2.Text + "', '" + textBox3.Text + "','" + textBox4.Text + "')";
+            //cmd.ExecuteNonQuery();
+            //loadData();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -106,6 +123,10 @@ namespace QLBH_lastproject
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
             cmd = conn.CreateCommand();
             cmd.CommandText = "delete from dbo.Cart where CartID = '" + textBox1.Text + "'";
             cmd.ExecuteNonQuery();
@@ -113,6 +134,11 @@ namespace QLBH_lastproject
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

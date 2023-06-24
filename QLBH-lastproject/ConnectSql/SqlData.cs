@@ -10,7 +10,7 @@ namespace QLBH_lastproject.ConnectSql
 {
      public class SqlData
      {
-        private string connetionString = "Data Source =localhost;Initial Catalog = QLBH_WPF;User ID = sa;Password = 12345";
+        private string connetionString = @"Data Source=.\sqlexpress;Initial Catalog=QLBH_WPF;Integrated Security=True";
         private SqlConnection conn;
         private string sql;
         private SqlCommand cmd;
@@ -113,6 +113,50 @@ namespace QLBH_lastproject.ConnectSql
                 cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@userName", u);
                 cmd.Parameters.AddWithValue("@password", p);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally { conn.Close(); }
+        }
+        public Boolean Insert(int a, int b, int c, int d , int e , decimal f)
+        {
+            try
+            {
+                conn.Open();
+                sql = @"INSERT INTO [Order] (OrderID,userID,productID,productDetailID,quantity,Price) VALUES (@OrderID,@userID,@productID,@productDetailID,@quantity,@Price)";
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.Add("@OrderID", SqlDbType.Int).Value = a;
+                cmd.Parameters.Add("@userID", SqlDbType.Int).Value = b;
+
+                //a longer syntax for adding parameters
+                cmd.Parameters.Add("@productID", SqlDbType.Int).Value = c;
+                cmd.Parameters.Add("@productDetailID", SqlDbType.Int).Value = d;
+                cmd.Parameters.Add("@quantity", SqlDbType.Int).Value = e;
+                cmd.Parameters.Add("@Price", SqlDbType.Decimal).Value = f;
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally { conn.Close(); }
+        }
+        public DataTable SeclectionRole(int i) // sql cập nhật trạng thái onl/off +phân vai trò
+        {
+            try
+            {
+                conn.Open();
+                sql = @"select * from [Role] where @userID = userID";
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@userID", i);
                 dt = new DataTable();
                 dt.Load(cmd.ExecuteReader());
                 return dt;
