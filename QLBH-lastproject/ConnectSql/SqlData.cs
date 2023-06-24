@@ -124,5 +124,81 @@ namespace QLBH_lastproject.ConnectSql
             }
             finally { conn.Close(); }
         }
+        public DataTable getallCart()
+        {
+            try
+            {
+                conn.Open();
+                sql = @"select* from [Cart]";
+                cmd = new SqlCommand(sql, conn);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally { conn.Close(); }
+        }
+        public DataTable SeclectCart(int i)
+        {
+            try
+            {
+                conn.Open();
+                sql = @"select * from [Cart] where @CartID = CartID";
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@CartID", i);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally { conn.Close(); }
+        }
+        
+        public DataTable getallOrder(int i)
+        {
+            try
+            {
+                conn.Open();
+                sql = @"select * from [Order] where @OrderID = OrderID";
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@OrderID", i);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally { conn.Close(); }
+        }
+        public DataTable SeclectOrder(int i)
+        {
+            try
+            {
+                conn.Open();
+                sql = @"select * from [Order] where @UserID = UserID";
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@UserID", i);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally { conn.Close(); }
+        }
     }
 }
