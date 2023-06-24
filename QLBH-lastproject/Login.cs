@@ -35,6 +35,9 @@ namespace QLBH_lastproject
             }
             else
             {
+                //cập nhật trạng thái online + phân vai trò
+                //dt = sql.SeclectionRole(int.Parse(dt.Rows[0]["roleID"].ToString()));
+                //
                 this.Hide();
                 new Mainmenu().Show(this);
             }
