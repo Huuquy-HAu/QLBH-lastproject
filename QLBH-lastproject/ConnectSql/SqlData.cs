@@ -11,6 +11,7 @@ namespace QLBH_lastproject.ConnectSql
      public class SqlData
      {
         private string connetionString = "Data Source =localhost;Initial Catalog = QLBH_WPF;User ID = sa;Password = 12345";
+        private string connectionStringNopassword = "Data Source=.\\sqlexpress;Initial Catalog=QLBH_WPF;Integrated Security=True; trustServerCertificate = true";
         private SqlConnection conn;
         private string sql;
         private SqlCommand cmd;
@@ -20,7 +21,7 @@ namespace QLBH_lastproject.ConnectSql
         {
             try
             {
-                conn = new SqlConnection(connetionString);
+                conn = new SqlConnection(connectionStringNopassword);
             }
             catch (Exception ex)
             {

@@ -34,6 +34,10 @@ namespace QLBH_lastproject
         }
         private void ceat_cartprs(string name, string price, string id)
         {
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string relativePath = Path.Combine("..", "img", id + ".bmp");
+            string fullPath = @"D:\CS project\QLBH-lastproject\QLBH-lastproject\img\" + id + ".bmp";
+
             Panel penl = new Panel();
             //penl.Size = new Size(153, 210);
             //penl.BackColor = SystemColors.Control;
@@ -50,7 +54,7 @@ namespace QLBH_lastproject
             //pictureBox.BackgroundImage = myimage;
             pictureBox.Padding = new Padding(5);
             pictureBox.SetBounds(5, 4, 140, 140);
-            FileStream fs = new System.IO.FileStream(@"C:\Users\ASUS\Source\Repos\QLBH-lastproject\QLBH-lastproject\img\" + id + ".bmp", FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(fullPath, FileMode.Open, FileAccess.Read);
 
             pictureBox.Image = Image.FromStream(fs);
 
