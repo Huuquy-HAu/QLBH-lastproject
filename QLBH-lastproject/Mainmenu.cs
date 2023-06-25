@@ -42,6 +42,7 @@ namespace QLBH_lastproject
             //penl.Size = new Size(153, 210);
             //penl.BackColor = SystemColors.Control;
             penl.BackColor = SystemColors.ButtonShadow;
+            penl.Margin = new Padding(10);
             penl.SetBounds(10, 5, 155, 210);
             penl.Name = id;
 
@@ -65,19 +66,23 @@ namespace QLBH_lastproject
             Label namePrs = new Label();
             namePrs.Text = name;
             namePrs.SetBounds(7, 151, 140, 15);
-            namePrs.Click += Item_Click;
+            namePrs.Name = id;
+            namePrs.Click += ItemName_Click;
             Label pricePrs = new Label();
             string a = string.Format("{0:0,0}", int.Parse(price));
             pricePrs.Text = a + " VND";
             pricePrs.SetBounds(7, 184, 140, 15);
-            pricePrs.Click += Item_Click;
+            pricePrs.Name = id;
+            pricePrs.Click += ItemPrice_Click;
 
             Button btn_Add = new Button();
             btn_Add.Text = "Add";
             btn_Add.SetBounds(106, 169, 40, 40);
-            btn_Add.Click += Item_Click;
+            btn_Add.Name = id;
+            btn_Add.TabIndex = int.Parse(price);
+            btn_Add.Click += Item_Clicks;
 
-            penl.Click += Item_Click;
+            penl.Click += ItemCart_Click;
 
             penl.Controls.Add(btn_Add);
             penl.Controls.Add(pictureBox);
@@ -87,17 +92,58 @@ namespace QLBH_lastproject
             flowLayoutPanel1.Controls.Add(penl);
 
         }
-
-        private void Item_Click(object sender, EventArgs e)
+        private void ShowInfproduct(string n)
         {
-            //int n = int.Parse(flowLayoutPanel1.Controls[0].Name);
-            PictureBox clickPanel = (PictureBox)sender;
-            string a = clickPanel.Name;
-
-            InfoProduct ifo = new InfoProduct(int.Parse(a));
+            InfoProduct ifo = new InfoProduct(int.Parse(n));
             ////flowLayoutPanel1.Controls.Clear();
             ifo.Show();
             ifo.BringToFront();
+        }
+        private void Item_Click(object sender, EventArgs e)
+        {
+
+            //int n = int.Parse(flowLayoutPanel1.Controls[0].Name);
+            PictureBox clickPanel = (PictureBox)sender;
+            string a = clickPanel.Name;
+            ShowInfproduct(a);
+
+        }
+        private void ItemName_Click(object sender, EventArgs e)
+        {
+
+            //int n = int.Parse(flowLayoutPanel1.Controls[0].Name);
+            Label clickPanel = (Label)sender;
+            string a = clickPanel.Name;
+            ShowInfproduct(a);
+
+        }
+        private void ItemCart_Click(object sender, EventArgs e)
+        {
+
+            //int n = int.Parse(flowLayoutPanel1.Controls[0].Name);
+            Panel clickPanel = (Panel)sender;
+            string a = clickPanel.Name;
+            ShowInfproduct(a);
+
+        }
+        private void ItemPrice_Click(object sender, EventArgs e)
+        {
+
+            //int n = int.Parse(flowLayoutPanel1.Controls[0].Name);
+            Label clickPanel = (Label)sender;
+            string a = clickPanel.Name;
+            ShowInfproduct(a);
+
+        }
+        private void Item_Clicks(object sender, EventArgs e)
+        {
+            //chưa có data
+            Button btn = (Button)sender;
+            /*int a = int.Parse(btn.Name);
+            decimal b = btn.TabIndex;
+            SqlData sql = new SqlData();
+            sql.Insert(1,1,a,a,1,b);*/
+            MessageBox.Show("Chưa có database!", "Thông báo", MessageBoxButtons.OK);
         }
         private void giohang_Click(object sender, EventArgs e)
         {
@@ -153,13 +199,47 @@ namespace QLBH_lastproject
         private void button1_Click(object sender, EventArgs e)
         {
 
+            TimKiem(button1.Text);
         }
 
+        private void TimKiem(string str)
+        {
+            DataTable dt = new SqlData().Seclection();
+            flowLayoutPanel1.Controls.Clear();
+
+
+            foreach (DataRow row in dt.Rows)
+            {
+                string a = row["productName"].ToString().Trim();
+                if (a.IndexOf(str) >= 0)
+                {
+                    ceat_cartprs(row["productName"].ToString(), row["price"].ToString(), row["productID"].ToString());
+                }
+
+            }
+            if (flowLayoutPanel1.Controls.Count == 0)
+            {
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.Size = new Size(300, 300);
+                pictureBox.Margin = new Padding(200, 80, 200, 80);
+                FileStream fs = new System.IO.FileStream(@"C:\Users\ASUS\Source\Repos\QLBH-lastproject\QLBH-lastproject\img\404.jpg", FileMode.Open, FileAccess.Read);
+
+                pictureBox.Image = Image.FromStream(fs);
+
+                fs.Close();
+                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+
+
+                flowLayoutPanel1.Controls.Add(pictureBox);
+
+            }
+        }
         private void timkiem_Click(object sender, EventArgs e)
         {
             if (textBox1.Text == "")
             {
                 //if(flowLayoutPanel1 == null)
+                flowLayoutPanel1.Controls.Clear();
                 Load_Data();
             }
             else
@@ -168,21 +248,31 @@ namespace QLBH_lastproject
                 string n = b.Substring(0, 1).ToUpper();
                 string m = b.Substring(1);
                 // string s = ;
-                DataTable dt = new SqlData().Seclection();
-                flowLayoutPanel1.Controls.Clear();
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    string a = row["productName"].ToString().Trim();
-                    if (a.IndexOf(n + m) >= 0)
-                    {
-                        ceat_cartprs(row["productName"].ToString(), row["price"].ToString(), row["productID"].ToString());
-                    }
-
-                }
+                TimKiem(n + m);
             }
 
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            TimKiem(button2.Text);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            TimKiem(button3.Text);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            TimKiem(button4.Text);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.Controls.Clear();
+            Load_Data();
         }
     }
 }

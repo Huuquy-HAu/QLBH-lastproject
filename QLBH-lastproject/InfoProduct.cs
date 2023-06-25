@@ -69,5 +69,12 @@ namespace QLBH_lastproject
             label8.Text = (a + 1).ToString();
             //if (a == 0) { label8.Text = "1"; }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+            this.Close();
+            
+        }
     }
 }

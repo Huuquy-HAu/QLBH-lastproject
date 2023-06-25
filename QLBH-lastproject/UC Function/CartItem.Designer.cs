@@ -28,22 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CartItem));
             Iphone14panel = new Panel();
-            numericUpDown1 = new NumericUpDown();
-            label9 = new Label();
-            label8 = new Label();
             pictureBox1 = new PictureBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            textBox1 = new TextBox();
+            label4 = new Label();
             Iphone14panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // Iphone14panel
             // 
-            Iphone14panel.Controls.Add(numericUpDown1);
-            Iphone14panel.Controls.Add(label9);
-            Iphone14panel.Controls.Add(label8);
+            Iphone14panel.Controls.Add(label4);
+            Iphone14panel.Controls.Add(textBox1);
+            Iphone14panel.Controls.Add(label3);
+            Iphone14panel.Controls.Add(label2);
+            Iphone14panel.Controls.Add(label1);
             Iphone14panel.Controls.Add(pictureBox1);
             Iphone14panel.Location = new Point(3, 0);
             Iphone14panel.Name = "Iphone14panel";
@@ -51,39 +53,57 @@
             Iphone14panel.TabIndex = 4;
             Iphone14panel.Visible = false;
             // 
-            // numericUpDown1
-            // 
-            numericUpDown1.Location = new Point(607, 28);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(38, 23);
-            numericUpDown1.TabIndex = 3;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(473, 30);
-            label9.Name = "label9";
-            label9.Size = new Size(38, 15);
-            label9.TabIndex = 2;
-            label9.Text = "label9";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(328, 31);
-            label8.Name = "label8";
-            label8.Size = new Size(38, 15);
-            label8.TabIndex = 1;
-            label8.Text = "label8";
-            // 
             // pictureBox1
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(3, 3);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(72, 72);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(198, 27);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 1;
+            label1.Text = "label1";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(404, 29);
+            label2.Name = "label2";
+            label2.Size = new Size(38, 15);
+            label2.TabIndex = 2;
+            label2.Text = "label2";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(531, 29);
+            label3.Name = "label3";
+            label3.Size = new Size(38, 15);
+            label3.TabIndex = 3;
+            label3.Text = "label3";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(575, 24);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(32, 25);
+            textBox1.TabIndex = 4;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(613, 27);
+            label4.Name = "label4";
+            label4.Size = new Size(38, 15);
+            label4.TabIndex = 5;
+            label4.Text = "label4";
             // 
             // CartItem
             // 
@@ -94,7 +114,6 @@
             Size = new Size(664, 80);
             Iphone14panel.ResumeLayout(false);
             Iphone14panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -102,9 +121,11 @@
         #endregion
 
         private Panel Iphone14panel;
-        private NumericUpDown numericUpDown1;
-        private Label label9;
-        private Label label8;
         private PictureBox pictureBox1;
+        private Label label1;
+        private Label label4;
+        private TextBox textBox1;
+        private Label label3;
+        private Label label2;
     }
 }

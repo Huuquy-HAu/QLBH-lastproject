@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Mainmenu));
             panel1 = new Panel();
+            pictureBox1 = new PictureBox();
             button5 = new Button();
             btnAdmin = new Button();
             donhang = new Button();
@@ -44,12 +46,14 @@
             textBox1 = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(64, 64, 64);
+            panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(button5);
             panel1.Controls.Add(btnAdmin);
             panel1.Controls.Add(donhang);
@@ -60,6 +64,19 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(200, 600);
             panel1.TabIndex = 3;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.InitialImage = null;
+            pictureBox1.Location = new Point(47, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(100, 100);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // button5
             // 
@@ -149,6 +166,7 @@
             button4.TabIndex = 6;
             button4.Text = "OPPO";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // button3
             // 
@@ -158,6 +176,7 @@
             button3.TabIndex = 5;
             button3.Text = "Nokia";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button2
             // 
@@ -165,8 +184,9 @@
             button2.Name = "button2";
             button2.Size = new Size(64, 24);
             button2.TabIndex = 4;
-            button2.Text = "Apple";
+            button2.Text = "Iphone";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -231,6 +251,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Mainmenu";
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ResumeLayout(false);
@@ -252,5 +273,6 @@
         private Button button3;
         private Button button2;
         private Button button4;
+        private PictureBox pictureBox1;
     }
 }

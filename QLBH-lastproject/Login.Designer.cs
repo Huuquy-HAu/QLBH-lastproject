@@ -95,6 +95,7 @@
             textBox2.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             textBox2.Location = new Point(54, 295);
             textBox2.Name = "textBox2";
+            textBox2.PasswordChar = '*';
             textBox2.Size = new Size(322, 24);
             textBox2.TabIndex = 5;
             // 

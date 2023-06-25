@@ -155,7 +155,7 @@
             button1.ForeColor = SystemColors.ControlLightLight;
             button1.Location = new Point(125, 373);
             button1.Name = "button1";
-            button1.Size = new Size(123, 23);
+            button1.Size = new Size(123, 38);
             button1.TabIndex = 10;
             button1.Text = "Thêm vào giỏ hàng";
             button1.UseVisualStyleBackColor = false;
@@ -167,10 +167,11 @@
             button2.ForeColor = SystemColors.ControlLightLight;
             button2.Location = new Point(393, 373);
             button2.Name = "button2";
-            button2.Size = new Size(75, 23);
+            button2.Size = new Size(75, 38);
             button2.TabIndex = 11;
             button2.Text = "Mua ngay";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // label10
             // 
