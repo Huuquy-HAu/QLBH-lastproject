@@ -30,15 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cart));
             panel2 = new Panel();
+            pricelabel = new Label();
             label6 = new Label();
             button2 = new Button();
-            button1 = new Button();
-            thembtn = new Button();
-            label8 = new Label();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            textBox4 = new TextBox();
             textBox3 = new TextBox();
             textBox2 = new TextBox();
             textBox1 = new TextBox();
@@ -47,8 +44,12 @@
             label7 = new Label();
             thanhtoan = new Button();
             PnlMain = new Panel();
+            label9 = new Label();
+            textBox5 = new TextBox();
             trolai = new Button();
             label1 = new Label();
+            label8 = new Label();
+            textBox4 = new TextBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             PnlMain.SuspendLayout();
@@ -57,11 +58,21 @@
             // panel2
             // 
             panel2.BackColor = Color.WhiteSmoke;
+            panel2.Controls.Add(pricelabel);
             panel2.Controls.Add(label6);
-            panel2.Location = new Point(708, 358);
+            panel2.Location = new Point(671, 290);
             panel2.Name = "panel2";
-            panel2.Size = new Size(239, 65);
+            panel2.Size = new Size(276, 65);
             panel2.TabIndex = 19;
+            // 
+            // pricelabel
+            // 
+            pricelabel.AutoSize = true;
+            pricelabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            pricelabel.Location = new Point(126, 21);
+            pricelabel.Name = "pricelabel";
+            pricelabel.Size = new Size(0, 25);
+            pricelabel.TabIndex = 2;
             // 
             // label6
             // 
@@ -76,58 +87,27 @@
             // button2
             // 
             button2.BackColor = Color.PeachPuff;
-            button2.Location = new Point(708, 262);
+            button2.Location = new Point(671, 172);
             button2.Name = "button2";
-            button2.Size = new Size(239, 47);
+            button2.Size = new Size(276, 47);
             button2.TabIndex = 18;
             button2.Text = "Xóa giỏ hàng";
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click_1;
             // 
-            // button1
-            // 
-            button1.BackColor = Color.PeachPuff;
-            button1.Location = new Point(708, 200);
-            button1.Name = "button1";
-            button1.Size = new Size(239, 47);
-            button1.TabIndex = 17;
-            button1.Text = "Sửa giỏ hàng";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
-            // 
-            // thembtn
-            // 
-            thembtn.BackColor = Color.PeachPuff;
-            thembtn.Location = new Point(708, 138);
-            thembtn.Name = "thembtn";
-            thembtn.Size = new Size(239, 47);
-            thembtn.TabIndex = 16;
-            thembtn.Text = "Thêm giỏ hàng";
-            thembtn.UseVisualStyleBackColor = false;
-            thembtn.Click += thembtn_Click_1;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(460, 415);
-            label8.Name = "label8";
-            label8.Size = new Size(85, 15);
-            label8.TabIndex = 14;
-            label8.Text = "Mã thanh toán";
-            // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(227, 415);
+            label4.Location = new Point(184, 101);
             label4.Name = "label4";
-            label4.Size = new Size(58, 15);
+            label4.Size = new Size(79, 15);
             label4.TabIndex = 13;
-            label4.Text = "Ngày tạo ";
+            label4.Text = "tên sản phẩm";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(121, 415);
+            label3.Location = new Point(102, 101);
             label3.Name = "label3";
             label3.Size = new Size(41, 15);
             label3.TabIndex = 12;
@@ -136,37 +116,33 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(41, 415);
+            label2.Location = new Point(22, 101);
             label2.Name = "label2";
             label2.Size = new Size(74, 15);
             label2.TabIndex = 11;
             label2.Text = "Mã giỏ hàng";
             // 
-            // textBox4
-            // 
-            textBox4.Location = new Point(460, 447);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(142, 23);
-            textBox4.TabIndex = 9;
-            // 
             // textBox3
             // 
-            textBox3.Location = new Point(219, 447);
+            textBox3.Location = new Point(184, 133);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(243, 23);
+            textBox3.ReadOnly = true;
+            textBox3.Size = new Size(246, 23);
             textBox3.TabIndex = 8;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(112, 447);
+            textBox2.Location = new Point(93, 133);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(109, 23);
+            textBox2.ReadOnly = true;
+            textBox2.Size = new Size(91, 23);
             textBox2.TabIndex = 7;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(38, 447);
+            textBox1.Location = new Point(19, 133);
             textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
             textBox1.Size = new Size(76, 23);
             textBox1.TabIndex = 6;
             // 
@@ -175,11 +151,10 @@
             dataGridView1.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(41, 138);
+            dataGridView1.Location = new Point(22, 197);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullColumnSelect;
-            dataGridView1.Size = new Size(564, 262);
+            dataGridView1.Size = new Size(629, 262);
             dataGridView1.TabIndex = 5;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick_1;
             // 
@@ -187,7 +162,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(708, 321);
+            label5.Location = new Point(674, 251);
             label5.Name = "label5";
             label5.Size = new Size(123, 21);
             label5.TabIndex = 4;
@@ -206,9 +181,9 @@
             thanhtoan.BackColor = Color.Gold;
             thanhtoan.FlatAppearance.BorderColor = Color.Black;
             thanhtoan.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            thanhtoan.Location = new Point(708, 429);
+            thanhtoan.Location = new Point(671, 361);
             thanhtoan.Name = "thanhtoan";
-            thanhtoan.Size = new Size(239, 52);
+            thanhtoan.Size = new Size(276, 52);
             thanhtoan.TabIndex = 3;
             thanhtoan.Text = "Đặt hàng";
             thanhtoan.UseVisualStyleBackColor = false;
@@ -217,12 +192,12 @@
             // PnlMain
             // 
             PnlMain.BackColor = SystemColors.ButtonHighlight;
+            PnlMain.Controls.Add(label9);
+            PnlMain.Controls.Add(textBox5);
             PnlMain.Controls.Add(trolai);
             PnlMain.Controls.Add(label1);
             PnlMain.Controls.Add(panel2);
             PnlMain.Controls.Add(button2);
-            PnlMain.Controls.Add(button1);
-            PnlMain.Controls.Add(thembtn);
             PnlMain.Controls.Add(label8);
             PnlMain.Controls.Add(label4);
             PnlMain.Controls.Add(label3);
@@ -240,6 +215,23 @@
             PnlMain.Name = "PnlMain";
             PnlMain.Size = new Size(996, 595);
             PnlMain.TabIndex = 12;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(580, 101);
+            label9.Name = "label9";
+            label9.Size = new Size(57, 15);
+            label9.TabIndex = 22;
+            label9.Text = "Số lượng ";
+            // 
+            // textBox5
+            // 
+            textBox5.Location = new Point(559, 133);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(78, 23);
+            textBox5.TabIndex = 20;
+            textBox5.TextAlign = HorizontalAlignment.Right;
             // 
             // trolai
             // 
@@ -267,6 +259,25 @@
             label1.Text = "Giỏ hàng ";
             label1.Click += label1_Click;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(506, 101);
+            label8.Name = "label8";
+            label8.Size = new Size(27, 15);
+            label8.TabIndex = 14;
+            label8.Text = "Giá ";
+            // 
+            // textBox4
+            // 
+            textBox4.Location = new Point(426, 133);
+            textBox4.Name = "textBox4";
+            textBox4.ReadOnly = true;
+            textBox4.Size = new Size(136, 23);
+            textBox4.TabIndex = 9;
+            textBox4.TextAlign = HorizontalAlignment.Right;
+            textBox4.TextChanged += textBox4_TextChanged;
+            // 
             // Cart
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -290,13 +301,9 @@
         private Panel panel2;
         private Label label6;
         private Button button2;
-        private Button button1;
-        private Button thembtn;
-        private Label label8;
         private Label label4;
         private Label label3;
         private Label label2;
-        private TextBox textBox4;
         private TextBox textBox3;
         private TextBox textBox2;
         private TextBox textBox1;
@@ -307,5 +314,10 @@
         private Panel PnlMain;
         private Button trolai;
         private Label label1;
+        private TextBox textBox5;
+        private Label label9;
+        private Label label8;
+        private TextBox textBox4;
+        private Label pricelabel;
     }
 }
