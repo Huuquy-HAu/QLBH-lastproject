@@ -82,18 +82,18 @@ namespace QLBH_lastproject
 
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            textBox1.ReadOnly = true;
+            /*textBox1.ReadOnly = true;
             int i;
             i = dataGridView1.CurrentRow.Index;
             textBox1.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
             textBox2.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
             textBox3.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
-            textBox4.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();
+            textBox4.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();*/
         }
 
         private void thembtn_Click_1(object sender, EventArgs e)
         {
-            int cartid = int.Parse(textBox1.Text);
+            /*int cartid = int.Parse(textBox1.Text);
             int userid = int.Parse(textBox2.Text);
             int createat = int.Parse(textBox3.Text);
             int orderid = int.Parse(textBox4.Text);
@@ -105,7 +105,7 @@ namespace QLBH_lastproject
             else
             {
                 MessageBox.Show("Xay ra loi : ", "Khong sua duoc", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }*/
 
             //cmd = conn.CreateCommand();
             //cmd.CommandText = "insert into dbo.Cart values('" + textBox1.Text + "', '" + textBox2.Text + "', '" + textBox3.Text + "','" + textBox4.Text + "')";
