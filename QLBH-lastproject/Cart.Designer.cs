@@ -126,6 +126,7 @@
             // 
             textBox3.Location = new Point(184, 133);
             textBox3.Name = "textBox3";
+            textBox3.ReadOnly = true;
             textBox3.Size = new Size(246, 23);
             textBox3.TabIndex = 8;
             // 
@@ -133,6 +134,7 @@
             // 
             textBox2.Location = new Point(93, 133);
             textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
             textBox2.Size = new Size(91, 23);
             textBox2.TabIndex = 7;
             // 
@@ -140,6 +142,7 @@
             // 
             textBox1.Location = new Point(19, 133);
             textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
             textBox1.Size = new Size(76, 23);
             textBox1.TabIndex = 6;
             // 
@@ -269,6 +272,7 @@
             // 
             textBox4.Location = new Point(426, 133);
             textBox4.Name = "textBox4";
+            textBox4.ReadOnly = true;
             textBox4.Size = new Size(136, 23);
             textBox4.TabIndex = 9;
             textBox4.TextAlign = HorizontalAlignment.Right;

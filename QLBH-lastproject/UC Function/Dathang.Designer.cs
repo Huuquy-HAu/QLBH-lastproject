@@ -57,9 +57,10 @@
             dataGridView2.Location = new Point(28, 32);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
-            dataGridView2.Size = new Size(695, 225);
+            dataGridView2.Size = new Size(695, 119);
             dataGridView2.TabIndex = 5;
             dataGridView2.CellContentClick += dataGridView2_CellContentClick;
+            dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
             // 
             // button2
             // 

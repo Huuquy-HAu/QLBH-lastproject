@@ -19,7 +19,7 @@ namespace QLBH_lastproject
         SqlConnection conn;
         SqlCommand cmd;
 
-        string str = "Data Source=NTT0701\\SQLEXPRESS;Initial Catalog=QLBH_WPF;Integrated Security=True; TrustServerCertificate=true";
+        private string str = "Data Source=.\\sqlexpress;Initial Catalog=QLBH_WPF;Integrated Security=True; trustServerCertificate = true";
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataTable table = new DataTable();
 
@@ -84,13 +84,22 @@ namespace QLBH_lastproject
             }
             else
             {
-
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                    int orderId = int.Parse(selectedRow.Cells["OrderID"].Value.ToString());
+                    Dathang dathang = new Dathang();
+                    // update the order ID on user control Dathang
+                    dathang.UpdateOrderID(orderId);
+                }
                 addCartItem(new Dathang());
-                conn = new SqlConnection(str);
-                int selectedValue = int.Parse(textBox1.Text);
-                cmd.CommandText = "SELECT OrderID FROM [Order] WHERE OrderID = " + selectedValue;
-                cmd.ExecuteNonQuery();
-                loadData();
+                //conn = new SqlConnection(str);
+                //conn.Open();
+                //int selectedValue = int.Parse(textBox1.Text);
+
+                //cmd.CommandText = "SELECT OrderID FROM [Order] WHERE OrderID = " + selectedValue;
+                //cmd.ExecuteNonQuery();
+                //loadData();
             }
         }
         public delegate void OrderIDChangedEventHandler(int orderId);
@@ -116,58 +125,12 @@ namespace QLBH_lastproject
             //int orderId = (int)row.Cells["OrderID"].Value;
             //Dathang.Update(orderId);
             //}
-
         }
-
-
-        //private void thembtn_Click_1(object sender, EventArgs e)
-        //{
-        //int cartid = int.Parse(textBox1.Text);
-        //int userid = int.Parse(textBox2.Text);
-        //int createat = int.Parse(textBox3.Text);
-        //int orderid = int.Parse(textBox4.Text);
-        //getcart = new getCart(cartid, userid, createat, orderid);
-        //if (SqlData.Insertcart(getCart))
-        //{
-        //dataGridView1.DataSource = data.getallCart();
-        //}
-        //else
-        //{
-        //MessageBox.Show("Xay ra loi : ", "Khong sua duoc", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //}
-
-        //cmd = conn.CreateCommand();
-        //cmd.CommandText = "insert into dbo.Cart values('" + textBox1.Text + "', '" + textBox2.Text + "', '" + textBox3.Text + "','" + textBox4.Text + "')";
-        //cmd.ExecuteNonQuery();
-        //loadData();
-        //}
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //int cartid = int.Parse(textBox1.Text);
-        //int userid = int.Parse(textBox2.Text);
-        //int createat = int.Parse(textBox3.Text);
-        //int orderid = int.Parse(textBox4.Text);
-        //getcart = new getCart(cartid, userid, createat, orderid);
-        //if (SqlData.Update(getCart))
-        //{
-        //dataGridView1.DataSource = data.getallCart();
-        //}
-        //else
-        //{
-        //MessageBox.Show("Xay ra loi : ", "Khong sua duoc", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //}
-        //cmd = conn.CreateCommand();
-        //cmd.CommandText = "update dbo.Cart set UserID = '" + textBox2.Text + "', CreateAt = '" + textBox3.Text + "', orderID = '" + textBox4.Text + "' where CartID = '" + textBox1.Text + "'";
-        //cmd.ExecuteNonQuery();
-        //loadData();
-        //}
-
         private void button2_Click_1(object sender, EventArgs e)
         {
 
             cmd = conn.CreateCommand();
-            cmd.CommandText = "delete from dbo.Dathang where OrderID = '" + textBox1.Text + "'";
+            cmd.CommandText = "delete from [Order] where OrderID = '" + textBox1.Text + "'";
             cmd.ExecuteNonQuery();
             loadData();
             pricelabel.Text = "";
@@ -177,25 +140,17 @@ namespace QLBH_lastproject
             textBox4.Text = "";
             textBox5.Text = "";
         }
-
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
-
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
-
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-
         }
-
         private void label10_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

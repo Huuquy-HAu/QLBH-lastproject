@@ -18,11 +18,11 @@ namespace QLBH_lastproject.UC_Function
         SqlCommand command;
         SqlCommand cmd;
 
-        string str = "Data Source=NTT0701\\SQLEXPRESS;Initial Catalog=QLBH_WPF;Integrated Security=True; TrustServerCertificate=true";
+        private string str = "Data Source =.\\sqlexpress;Initial Catalog = QLBH_WPF; Integrated Security = True; trustServerCertificate = true";
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataTable table = new DataTable();
 
-        
+
         public void loadData1()
         {
             command = connection.CreateCommand();
@@ -33,19 +33,21 @@ namespace QLBH_lastproject.UC_Function
             dataGridView2.DataSource = table;
 
         }
+
         public void UpdateOrderID(int orderId)
         {
             orderID = orderId;
 
             // Update the UI controls with the new orderID value
-            dataGridView2.Text = orderId.ToString();
+            if (dataGridView2.Rows.Count > 0)
+            {
+                dataGridView2.Rows[0].Cells["orderID"].Value = orderId;
+            }
 
-            // Load cart items for the selected orderID
-            adapter.SelectCommand = new SqlCommand("SELECT * FROM [Cart] WHERE orderID = @orderId", connection);
+                // Load cart items for the selected orderID
+                adapter.SelectCommand = new SqlCommand("SELECT * FROM [Cart] WHERE orderID = @orderId", connection);
             adapter.SelectCommand.Parameters.AddWithValue("@orderId", orderId);
-            table.Clear();
-            adapter.Fill(table);
-            dataGridView2.DataSource = table;
+            loadData1();
         }
         void loadData2()
         {
@@ -122,7 +124,7 @@ namespace QLBH_lastproject.UC_Function
         }
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
         private bool button1Clicked = false;
         private bool button2Clicked = false;
@@ -130,10 +132,12 @@ namespace QLBH_lastproject.UC_Function
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(button1Clicked || button2Clicked) return;
+            if (button1Clicked || button2Clicked) return;
             connection = new SqlConnection(str);
             loadData4();
             button1Clicked = true;
+            MessageBox.Show("Đã hủy đơn hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+            return;
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -141,6 +145,17 @@ namespace QLBH_lastproject.UC_Function
             connection = new SqlConnection(str);
             loadData3();
             button2Clicked = true;
+            MessageBox.Show("Đã xác nhận thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+            return;
+        }
+
+        private void dataGridView2_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView2.SelectedRows[0];
+                string id = selectedRow.Cells["ID"].ToString();
+            }
         }
     }
 }
