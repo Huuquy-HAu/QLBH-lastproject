@@ -30,21 +30,18 @@
         {
             panel2 = new Panel();
             dataGridView2 = new DataGridView();
-            dataGridView1 = new DataGridView();
             button2 = new Button();
             button1 = new Button();
             panel1 = new Panel();
             label1 = new Label();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel2
             // 
             panel2.Controls.Add(dataGridView2);
-            panel2.Controls.Add(dataGridView1);
             panel2.Controls.Add(button2);
             panel2.Controls.Add(button1);
             panel2.Location = new Point(4, 118);
@@ -57,25 +54,13 @@
             dataGridView2.BackgroundColor = SystemColors.Control;
             dataGridView2.BorderStyle = BorderStyle.None;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(182, 33);
+            dataGridView2.Location = new Point(28, 32);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
-            dataGridView2.Size = new Size(541, 225);
+            dataGridView2.Size = new Size(695, 119);
             dataGridView2.TabIndex = 5;
             dataGridView2.CellContentClick += dataGridView2_CellContentClick;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.BackgroundColor = SystemColors.Control;
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.GridColor = SystemColors.Control;
-            dataGridView1.Location = new Point(32, 33);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(150, 225);
-            dataGridView1.TabIndex = 4;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
             // 
             // button2
             // 
@@ -87,6 +72,7 @@
             button2.TabIndex = 3;
             button2.Text = "Thanh toán";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -99,6 +85,7 @@
             button1.TabIndex = 2;
             button1.Text = "Hủy đơn hàng";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // panel1
             // 
@@ -130,7 +117,6 @@
             Load += Dathang_Load;
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -142,7 +128,6 @@
         private Button button1;
         private Panel panel1;
         private Label label1;
-        private DataGridView dataGridView1;
         private Button button2;
         private DataGridView dataGridView2;
     }
