@@ -86,22 +86,20 @@ namespace QLBH_lastproject
             {
                 Dathang dathang = new Dathang();
                 addCartItem(dathang);
+                conn = new SqlConnection(str);
+                conn.Open();
+                int selectedValue = int.Parse(textBox1.Text);
+
+                cmd.CommandText = "SELECT OrderID FROM [Order] WHERE OrderID = " + selectedValue;
+                cmd.ExecuteNonQuery();
+                loadData();
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
                     int orderId = int.Parse(selectedRow.Cells["OrderID"].Value.ToString());
                     // update the order ID on user control Dathang
                     dathang.UpdateOrderID(orderId);
-                    
                 }
-                
-                //conn = new SqlConnection(str);
-                //conn.Open();
-                //int selectedValue = int.Parse(textBox1.Text);
-
-                //cmd.CommandText = "SELECT OrderID FROM [Order] WHERE OrderID = " + selectedValue;
-                //cmd.ExecuteNonQuery();
-                //loadData();
             }
         }
         public delegate void OrderIDChangedEventHandler(int orderId);
@@ -120,26 +118,6 @@ namespace QLBH_lastproject
         }
         private void button2_Click_1(object sender, EventArgs e)
         {
-            int cartid = int.Parse(textBox1.Text);
-            int userid = int.Parse(textBox2.Text);
-            int createat = int.Parse(textBox3.Text);
-            int orderid = int.Parse(textBox4.Text);
-            getcart = new getCart(cartid, userid, createat, orderid);
-            if (SqlData.Insertcart)
-            {
-                dataGridView1.DataSource = data.getallCart();
-            }
-            else
-            {
-                MessageBox.Show("Xay ra loi : ", "Khong sua duoc", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            //cmd = conn.CreateCommand();
-            //cmd.CommandText = "insert into dbo.Cart values('" + textBox1.Text + "', '" + textBox2.Text + "', '" + textBox3.Text + "','" + textBox4.Text + "')";
-            //cmd.ExecuteNonQuery();
-            //loadData();
-        }
-
             cmd = conn.CreateCommand();
             cmd.CommandText = "delete from [Order] where OrderID = '" + textBox1.Text + "'";
             cmd.ExecuteNonQuery();
