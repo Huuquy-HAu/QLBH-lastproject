@@ -42,12 +42,18 @@ namespace QLBH_lastproject.UC_Function
             if (dataGridView2.Rows.Count > 0)
             {
                 dataGridView2.Rows[0].Cells["orderID"].Value = orderId;
+                loadData1();
+            }
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridView2.SelectedRows[0];
+                string id = selectedRow.Cells["orderID"].ToString();
             }
 
-                // Load cart items for the selected orderID
-                adapter.SelectCommand = new SqlCommand("SELECT * FROM [Cart] WHERE orderID = @orderId", connection);
-            adapter.SelectCommand.Parameters.AddWithValue("@orderId", orderId);
-            loadData1();
+            // Load cart items for the selected orderID
+            //adapter.SelectCommand = new SqlCommand("SELECT * FROM [Cart] WHERE orderID = @orderId", connection);
+            //adapter.SelectCommand.Parameters.AddWithValue("@orderId", orderId);
+
         }
         void loadData2()
         {
@@ -151,11 +157,7 @@ namespace QLBH_lastproject.UC_Function
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView2.SelectedRows.Count > 0)
-            {
-                DataGridViewRow selectedRow = dataGridView2.SelectedRows[0];
-                string id = selectedRow.Cells["ID"].ToString();
-            }
+            
         }
     }
 }

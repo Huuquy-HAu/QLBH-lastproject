@@ -61,7 +61,7 @@ namespace QLBH_lastproject
         }
         private void addCartItem(UserControl userControl)
         {
-
+            userControl.Dock = DockStyle.Fill;
             PnlMain.Controls.Clear();
             PnlMain.Controls.Add(userControl);
             userControl.BringToFront();
@@ -84,15 +84,17 @@ namespace QLBH_lastproject
             }
             else
             {
+                Dathang dathang = new Dathang();
+                addCartItem(dathang);
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
                     int orderId = int.Parse(selectedRow.Cells["OrderID"].Value.ToString());
-                    Dathang dathang = new Dathang();
                     // update the order ID on user control Dathang
                     dathang.UpdateOrderID(orderId);
+                    
                 }
-                addCartItem(new Dathang());
+                
                 //conn = new SqlConnection(str);
                 //conn.Open();
                 //int selectedValue = int.Parse(textBox1.Text);
