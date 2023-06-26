@@ -24,7 +24,7 @@ namespace WinFormsApp1
             activeForm = false;
             foreach (var pnl in tableLayoutPanel1.Controls.OfType<Panel>())
                 pnl.BackColor = Color.Silver;
-            Button btn = (Button)sender;
+                Button btn = (Button)sender;
             switch (btn.Name)
             {
                 case "BtnAllProduct":

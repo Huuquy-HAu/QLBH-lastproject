@@ -43,6 +43,10 @@
             label10 = new Label();
             label11 = new Label();
             label12 = new Label();
+            label13 = new Label();
+            label14 = new Label();
+            label15 = new Label();
+            label16 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -114,7 +118,7 @@
             label6.Name = "label6";
             label6.Size = new Size(61, 17);
             label6.TabIndex = 6;
-            label6.Text = "Só lượng";
+            label6.Text = "Số lượng";
             // 
             // label7
             // 
@@ -159,6 +163,7 @@
             button1.TabIndex = 10;
             button1.Text = "Thêm vào giỏ hàng";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -203,11 +208,56 @@
             label12.TabIndex = 14;
             label12.Text = "label12";
             // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(282, 315);
+            label13.Name = "label13";
+            label13.Size = new Size(57, 15);
+            label13.TabIndex = 15;
+            label13.Text = "Tổng tiền";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label14.ForeColor = Color.OrangeRed;
+            label14.Location = new Point(351, 313);
+            label14.Name = "label14";
+            label14.Size = new Size(27, 17);
+            label14.TabIndex = 16;
+            label14.Text = "Giá";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 15.75F, FontStyle.Italic, GraphicsUnit.Point);
+            label15.ForeColor = Color.DarkGreen;
+            label15.Location = new Point(456, 73);
+            label15.Name = "label15";
+            label15.Size = new Size(77, 30);
+            label15.TabIndex = 17;
+            label15.Text = "label15";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.ForeColor = Color.OrangeRed;
+            label16.Location = new Point(423, 315);
+            label16.Name = "label16";
+            label16.Size = new Size(31, 15);
+            label16.TabIndex = 18;
+            label16.Text = "VND";
+            // 
             // InfoProduct
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(603, 457);
+            Controls.Add(label16);
+            Controls.Add(label15);
+            Controls.Add(label14);
+            Controls.Add(label13);
             Controls.Add(label12);
             Controls.Add(label11);
             Controls.Add(label10);
@@ -227,7 +277,6 @@
             Name = "InfoProduct";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "InfoProduct";
-            Load += InfoProduct_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -250,5 +299,9 @@
         private Label label10;
         private Label label11;
         private Label label12;
+        private Label label13;
+        private Label label14;
+        private Label label15;
+        private Label label16;
     }
 }

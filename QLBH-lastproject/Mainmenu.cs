@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
@@ -13,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinFormsApp1;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace QLBH_lastproject
 {
@@ -22,6 +24,19 @@ namespace QLBH_lastproject
         {
             InitializeComponent();
             //SqlData bd = new SqlData();
+            Load_Data();
+        }
+        public Mainmenu(int i)
+        {
+            InitializeComponent();
+            //SqlData bd = new SqlData();
+
+            if(i == 2)
+            {
+                btnAdmin.Visible = false;
+                button5.SetBounds(0, 310, 197, 61);
+            }
+
             Load_Data();
         }
         private void Load_Data()
@@ -75,6 +90,7 @@ namespace QLBH_lastproject
             pricePrs.Name = id;
             pricePrs.Click += ItemPrice_Click;
 
+            //System.Windows.Forms.Button btn_Add = new System.Windows.Forms.Button();
             Button btn_Add = new Button();
             btn_Add.Text = "Add";
             btn_Add.SetBounds(106, 169, 40, 40);
@@ -94,7 +110,7 @@ namespace QLBH_lastproject
         }
         private void ShowInfproduct(string n)
         {
-            InfoProduct ifo = new InfoProduct(int.Parse(n));
+            InfoProduct ifo = new InfoProduct(int.Parse(n), "info");
             ////flowLayoutPanel1.Controls.Clear();
             ifo.Show();
             ifo.BringToFront();
@@ -138,12 +154,15 @@ namespace QLBH_lastproject
         private void Item_Clicks(object sender, EventArgs e)
         {
             //chưa có data
+            //System.Windows.Forms.Button btn = (System.Windows.Forms.Button)sender;
             Button btn = (Button)sender;
-            /*int a = int.Parse(btn.Name);
-            decimal b = btn.TabIndex;
+            int productId = int.Parse(btn.Name);
+            decimal price = btn.TabIndex;
             SqlData sql = new SqlData();
-            sql.Insert(1,1,a,a,1,b);*/
-            MessageBox.Show("Chưa có database!", "Thông báo", MessageBoxButtons.OK);
+            DataRow dr = sql.GetAccountonline();
+            int userId = int.Parse(dr["userID"].ToString());
+            sql.Insert(userId, productId, productId, 1, price);
+            //MessageBox.Show("Chưa có database!", "Thông báo", MessageBoxButtons.OK);
         }
         private void giohang_Click(object sender, EventArgs e)
         {
@@ -172,6 +191,7 @@ namespace QLBH_lastproject
             dialogResult = MessageBox.Show("Bạn muốn thoát ?", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.OK)
             {
+                new SqlData().LoginUser("online");
                 this.Close();
             }
             else if (dialogResult == DialogResult.Cancel)

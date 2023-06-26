@@ -86,7 +86,7 @@
             button5.Location = new Point(0, 377);
             button5.Name = "button5";
             button5.Size = new Size(197, 61);
-            button5.TabIndex = 4;
+            button5.TabIndex = 3;
             button5.Text = "Thoát";
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
@@ -99,7 +99,7 @@
             btnAdmin.Location = new Point(0, 310);
             btnAdmin.Name = "btnAdmin";
             btnAdmin.Size = new Size(197, 61);
-            btnAdmin.TabIndex = 3;
+            btnAdmin.TabIndex = 4;
             btnAdmin.Text = "Admin";
             btnAdmin.UseVisualStyleBackColor = true;
             btnAdmin.Click += taikhoan_Click;

@@ -25,21 +25,26 @@ namespace QLBH_lastproject
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             SqlData sql = new SqlData();
-            DataTable dt = sql.SeclectUser(textBox1.Text, textBox2.Text);
-
-            if (dt.Rows.Count == 0)
+            if (!sql.LoginUser(textBox1.Text, textBox2.Text))
             {
                 MessageBox.Show("Thông tin tài khoản không chính xác!", "Thông báo", MessageBoxButtons.OK);
             }
             else
             {
-                //cập nhật trạng thái online + phân vai trò
-                //dt = sql.SeclectionRole(int.Parse(dt.Rows[0]["roleID"].ToString()));
-                //
-                this.Hide();
-                new Mainmenu().Show(this);
+                DataRow dr = sql.GetAccountonline();
+                int s = int.Parse(dr["roleID"].ToString());
+                if (s == 3)
+                {
+                    sql.LoginUser("online");
+                    //MessageBox.Show("Tài khoản này đang tạm khóa!\n Vui lòng liên hệ hotline: 0987503481 để được hỗ trợ", "Thông báo", MessageBoxButtons.OK);
+                    MessageBox.Show("Tài khoản này đang tạm khóa!\n Vui lòng liên hệ A Hoàng để được hỗ trợ", "Thông báo", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    this.Hide();
+                    new Mainmenu(s).Show(this);
+                }
             }
         }
     }
