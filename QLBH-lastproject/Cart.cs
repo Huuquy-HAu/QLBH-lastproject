@@ -111,12 +111,10 @@ namespace QLBH_lastproject
         {
         }
         private bool m = false;
-        private void Editquantity()
+        
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(textBox5.Text == "" ) {
-                
-            }
-            else
+            if (e.KeyChar == (char)Keys.Enter) // Kiểm tra nếu ấn phím Enter
             {
                 int i = dataGridView1.CurrentRow.Index;
                 int orderID = Convert.ToInt32(dataGridView1.Rows[i].Cells[0].Value);
@@ -125,16 +123,13 @@ namespace QLBH_lastproject
                 cmd.CommandText = "UPDATE [Order] SET quantity = " + quantity + " WHERE OrderID = " + orderID;
                 cmd.ExecuteNonQuery();
                 loadData();
+                dataGridView1.CurrentCell = dataGridView1.Rows[i].Cells[0];
+                dataGridView1.Focus();
                 int price = Convert.ToInt32(dataGridView1.Rows[i].Cells[5].Value);
                 int quan = Convert.ToInt32(dataGridView1.Rows[i].Cells[4].Value);
                 double totalPrice = price * quan;
                 pricelabel.Text = totalPrice.ToString() + " VND";
             }
-            
-        }
-        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            Editquantity();
         }
 
         private void thanhtoan_Click(object sender, EventArgs e)
