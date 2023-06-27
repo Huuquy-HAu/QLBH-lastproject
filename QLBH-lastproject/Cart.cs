@@ -87,6 +87,8 @@ namespace QLBH_lastproject
             int price = Convert.ToInt32(dataGridView1.Rows[i].Cells[5].Value);
             int quantity = Convert.ToInt32(dataGridView1.Rows[i].Cells[4].Value);
             double totalPrice = price * quantity;
+            dataGridView1.CurrentCell = dataGridView1.Rows[i].Cells[0];
+            dataGridView1.Focus();
             pricelabel.Text = totalPrice.ToString() + " VND";
             label10.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
             label11.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
@@ -111,7 +113,7 @@ namespace QLBH_lastproject
         {
         }
         private bool m = false;
-        
+
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter) // Kiểm tra nếu ấn phím Enter
@@ -151,7 +153,6 @@ namespace QLBH_lastproject
                 conn = new SqlConnection(str);
                 conn.Open();
                 int selectedValue = int.Parse(label10.Text);
-
                 cmd.CommandText = "SELECT OrderID FROM [Order] WHERE OrderID = " + selectedValue;
                 cmd.ExecuteNonQuery();
                 loadData();
@@ -182,5 +183,6 @@ namespace QLBH_lastproject
         {
 
         }
+
     }
 }

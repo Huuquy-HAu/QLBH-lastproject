@@ -147,7 +147,7 @@ namespace QLBH_lastproject.UC_Function
                 MessageBox.Show("Đã hủy đơn hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
                 return;
             }
-            
+
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -160,12 +160,12 @@ namespace QLBH_lastproject.UC_Function
                 MessageBox.Show("Đã xác nhận thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
                 return;
             }
-            
+
         }
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

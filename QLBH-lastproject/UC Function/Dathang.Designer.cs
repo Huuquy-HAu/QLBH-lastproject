@@ -51,13 +51,14 @@
             // 
             // dataGridView2
             // 
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView2.BackgroundColor = SystemColors.Control;
             dataGridView2.BorderStyle = BorderStyle.None;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Location = new Point(28, 32);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
-            dataGridView2.Size = new Size(695, 119);
+            dataGridView2.Size = new Size(927, 103);
             dataGridView2.TabIndex = 5;
             dataGridView2.CellContentClick += dataGridView2_CellContentClick;
             dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
