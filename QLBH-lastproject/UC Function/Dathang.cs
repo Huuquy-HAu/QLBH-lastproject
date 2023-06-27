@@ -138,21 +138,29 @@ namespace QLBH_lastproject.UC_Function
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (button1Clicked || button2Clicked) return;
-            connection = new SqlConnection(str);
-            loadData4();
-            button1Clicked = true;
-            MessageBox.Show("Đã hủy đơn hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
-            return;
+            if (!button1Clicked || !button2Clicked)
+            {
+                connection = new SqlConnection(str);
+                loadData4();
+                button1Clicked = true;
+                button2Clicked = true;
+                MessageBox.Show("Đã hủy đơn hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+                return;
+            }
+            
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            if (button2Clicked || button1Clicked) return;
-            connection = new SqlConnection(str);
-            loadData3();
-            button2Clicked = true;
-            MessageBox.Show("Đã xác nhận thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
-            return;
+            if (!button2Clicked || !button1Clicked)
+            {
+                connection = new SqlConnection(str);
+                loadData3();
+                button1Clicked = true;
+                button2Clicked = true;
+                MessageBox.Show("Đã xác nhận thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+                return;
+            }
+            
         }
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
