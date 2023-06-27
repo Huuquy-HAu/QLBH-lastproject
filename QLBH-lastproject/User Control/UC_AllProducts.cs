@@ -138,6 +138,7 @@ namespace WinFormsApp1
 
                 loadData();
                 MessageBox.Show("Update successful!", "Message", MessageBoxButtons.OK);
+                clearValue();
             }
 
         }
