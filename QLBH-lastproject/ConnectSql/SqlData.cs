@@ -473,7 +473,7 @@ namespace QLBH_lastproject.ConnectSql
                     when p.cartStatusID = 0 then N'Chưa duyệt' 
                     when p.cartStatusID = 1 then N'Đã duyệt' 
                     when p.cartStatusID = 2 then N'Đã hủy' 
-                    else N'Đã hủy'
+                    else N'Hoàn thành'
                 end as status
                   
                 FROM [Cart] AS p 

@@ -30,6 +30,7 @@
         {
             panel2 = new Panel();
             panel3 = new Panel();
+            button7 = new Button();
             button6 = new Button();
             button5 = new Button();
             button4 = new Button();
@@ -40,7 +41,6 @@
             button1 = new Button();
             panel1 = new Panel();
             label1 = new Label();
-            button7 = new Button();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -69,6 +69,16 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(821, 61);
             panel3.TabIndex = 6;
+            // 
+            // button7
+            // 
+            button7.Location = new Point(549, 10);
+            button7.Name = "button7";
+            button7.Size = new Size(115, 41);
+            button7.TabIndex = 4;
+            button7.Text = "Hoàn thành";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
             // 
             // button6
             // 
@@ -121,8 +131,7 @@
             dataGridView2.Location = new Point(47, 97);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
-            dataGridView2.Size = new Size(821, 298);
-            dataGridView2.Size = new Size(927, 103);
+            dataGridView2.Size = new Size(821, 295);
             dataGridView2.TabIndex = 5;
             dataGridView2.CellClick += dataGridView2_CellClick;
             dataGridView2.RowPostPaint += dataGridView2_RowPostPaint;
@@ -144,6 +153,7 @@
             button2.TabIndex = 3;
             button2.Text = "Mua tiếp";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -156,6 +166,7 @@
             button1.TabIndex = 2;
             button1.Text = "X";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // panel1
             // 
@@ -176,16 +187,6 @@
             label1.Size = new Size(279, 40);
             label1.TabIndex = 2;
             label1.Text = "Hiện trạng đơn hàng";
-            // 
-            // button7
-            // 
-            button7.Location = new Point(549, 10);
-            button7.Name = "button7";
-            button7.Size = new Size(115, 41);
-            button7.TabIndex = 4;
-            button7.Text = "Hoàn thành";
-            button7.UseVisualStyleBackColor = true;
-            button7.Click += button7_Click;
             // 
             // Dathang
             // 
