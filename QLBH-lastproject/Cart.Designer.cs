@@ -247,6 +247,7 @@
             trolai.Text = "Trở lại trang chủ";
             trolai.TextAlign = ContentAlignment.MiddleRight;
             trolai.UseVisualStyleBackColor = false;
+            trolai.Click += trolai_Click_2;
             // 
             // label1
             // 
@@ -257,7 +258,6 @@
             label1.Size = new Size(140, 40);
             label1.TabIndex = 1;
             label1.Text = "Giỏ hàng ";
-            label1.Click += label1_Click;
             // 
             // label8
             // 
@@ -276,7 +276,6 @@
             textBox4.Size = new Size(136, 23);
             textBox4.TabIndex = 9;
             textBox4.TextAlign = HorizontalAlignment.Right;
-            textBox4.TextChanged += textBox4_TextChanged;
             // 
             // Cart
             // 

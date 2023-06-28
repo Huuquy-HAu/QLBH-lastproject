@@ -37,7 +37,6 @@
             textBox2 = new TextBox();
             checkBox1 = new CheckBox();
             button1 = new Button();
-            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -119,18 +118,6 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = Color.Red;
-            label4.Location = new Point(412, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(27, 30);
-            label4.TabIndex = 8;
-            label4.Text = "X";
-            label4.Click += label4_Click;
-            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -138,7 +125,6 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(442, 494);
-            Controls.Add(label4);
             Controls.Add(button1);
             Controls.Add(checkBox1);
             Controls.Add(textBox2);
@@ -147,7 +133,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(pictureBox1);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
@@ -166,6 +152,5 @@
         private TextBox textBox2;
         private CheckBox checkBox1;
         private Button button1;
-        private Label label4;
     }
 }

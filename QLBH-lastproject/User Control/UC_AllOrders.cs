@@ -28,7 +28,7 @@ namespace WinFormsApp1.UC
             dataGridView1.Columns["CreateAt"].HeaderText = "Ngày đặt";
             dataGridView1.Columns["status"].HeaderText = "Trạng thái";
             dataGridView1.Columns["orderID"].HeaderText = "Mã đơn đặt ";
-
+            dataGridView1.Columns["CreateAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
         }
 
@@ -36,8 +36,9 @@ namespace WinFormsApp1.UC
         {
             int n = int.Parse(dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[4].Value.ToString());
             var m = dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[3].Value.ToString();
-            new InfoProduct(n, m).Show();
+            var iDcart = dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString();
 
+            new InfoProduct(n, m, int.Parse(iDcart.ToString())).Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -61,6 +62,12 @@ namespace WinFormsApp1.UC
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             Load_Data();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SqlData sqlData = new SqlData();
+            dataGridView1.DataSource = sqlData.SeclectCart(3);
         }
     }
 }

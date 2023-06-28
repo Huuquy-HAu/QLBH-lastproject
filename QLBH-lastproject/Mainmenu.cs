@@ -29,9 +29,7 @@ namespace QLBH_lastproject
         public Mainmenu(int i)
         {
             InitializeComponent();
-            //SqlData bd = new SqlData();
-
-            if(i == 2)
+            if (i == 2)
             {
                 btnAdmin.Visible = false;
                 button5.SetBounds(0, 310, 197, 61);
@@ -51,7 +49,7 @@ namespace QLBH_lastproject
         {
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string relativePath = Path.Combine("..", "img", id + ".bmp");
-            string fullPath = @"D:\CS project\QLBH-lastproject\QLBH-lastproject\img\" + id + ".bmp";
+            string fullPath = @"C:\Users\ASUS\Source\Repos\QLBH-lastproject\QLBH-lastproject\img\" + id + ".bmp";
 
             Panel penl = new Panel();
             //penl.Size = new Size(153, 210);
@@ -110,7 +108,7 @@ namespace QLBH_lastproject
         }
         private void ShowInfproduct(string n)
         {
-            InfoProduct ifo = new InfoProduct(int.Parse(n), "info");
+            InfoProduct ifo = new InfoProduct(int.Parse(n), "info",0);
             ////flowLayoutPanel1.Controls.Clear();
             ifo.Show();
             ifo.BringToFront();
@@ -191,8 +189,8 @@ namespace QLBH_lastproject
             dialogResult = MessageBox.Show("Bạn muốn thoát ?", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.OK)
             {
-                new SqlData().LoginUser("online");
-                this.Close();
+                new SqlData().SetStatus("online");
+                Application.Exit();
             }
             else if (dialogResult == DialogResult.Cancel)
             {
@@ -293,6 +291,11 @@ namespace QLBH_lastproject
         {
             flowLayoutPanel1.Controls.Clear();
             Load_Data();
+        }
+
+        private void Mainmenu_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLBH_lastproject.ConnectSql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,139 +15,46 @@ namespace QLBH_lastproject.UC_Function
 {
     public partial class Dathang : UserControl
     {
-        SqlConnection connection;
-        SqlCommand command;
-        SqlCommand cmd;
-
-        private string str = "Data Source =.\\sqlexpress;Initial Catalog = QLBH_WPF; Integrated Security = True; trustServerCertificate = true";
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataTable table = new DataTable();
-
-
-        public void loadData1()
-        {
-            command = connection.CreateCommand();
-            command.CommandText = "SELECT [CartID], [UserID], [CreateAt], [cartStatusID], [orderID] FROM [Cart]";
-            adapter.SelectCommand = command;
-            table.Clear();
-            adapter.Fill(table);
-            dataGridView2.DataSource = table;
-
-        }
-
-        public void UpdateOrderID(int orderId)
-        {
-            orderID = orderId;
-
-            // Update the UI controls with the new orderID value
-            if (dataGridView2.Rows.Count > 0)
-            {
-                dataGridView2.Rows[0].Cells["orderID"].Value = orderId;
-            }
-
-                // Load cart items for the selected orderID
-                adapter.SelectCommand = new SqlCommand("SELECT * FROM [Cart] WHERE orderID = @orderId", connection);
-            adapter.SelectCommand.Parameters.AddWithValue("@orderId", orderId);
-            loadData1();
-        }
-        void loadData2()
-        {
-            command = connection.CreateCommand();
-            command.CommandText = "select CartStatusName from [CartStatus] where CartStatusID = '1'";
-            adapter.SelectCommand = command;
-            table.Clear();
-            adapter.Fill(table);
-            dataGridView2.DataSource = table;
-
-        }
-        void loadData3()
-        {
-            command = connection.CreateCommand();
-            command.CommandText = "select CartStatusName from [CartStatus] where CartStatusID = '2'";
-            adapter.SelectCommand = command;
-            table.Clear();
-            adapter.Fill(table);
-            dataGridView2.DataSource = table;
-
-        }
-        void loadData4()
-        {
-            command = connection.CreateCommand();
-            command.CommandText = "select CartStatusName from [CartStatus] where CartStatusID = '3'";
-            adapter.SelectCommand = command;
-            table.Clear();
-            adapter.Fill(table);
-            dataGridView2.DataSource = table;
-
-        }
         public Dathang()
         {
             InitializeComponent();
+            SqlData sql = new SqlData();
+            label1.Name = sql.GetAccountonline()["userID"].ToString();
         }
         private string GetCurrentDateTime()
         {
             DateTime dt = DateTime.Now;
             return dt.ToString("yyyy-MM-dd hh:mm:ss");
         }
-        private void AddToCart(int userID, int cartStatusID, int orderID)
-        {
-            try
-            {
-                string query = "INSERT INTO [Cart] ([CreateAt]) VALUES (@CreateAt)";
-                using (SqlConnection connection = new SqlConnection(str))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@CreateAt", GetCurrentDateTime());
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                    }
-                }
-                loadData1();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
+
         private void Dathang_Load(object sender, EventArgs e)
         {
-            dataGridView2.ReadOnly = true;
-            connection = new SqlConnection(str);
-            loadData1();
-            loadData2();
-        }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+            SqlData sql = new SqlData();
+
+
+            int i = int.Parse(label1.Name);
+            dataGridView2.DataSource = sql.GetCartUser(i);
+            dataGridView2.Columns["cartID"].HeaderText = "Mã đơn hàng";
+            dataGridView2.Columns["productName"].HeaderText = "Tên sản phẩm";
+            dataGridView2.Columns["quantity"].HeaderText = "Số lượng";
+            dataGridView2.Columns["Price"].HeaderText = "Thành tiền";
+            dataGridView2.Columns["CreateAt"].HeaderText = "Ngày đặt";
+            dataGridView2.Columns["status"].HeaderText = "Trạng thái";
+
+            dataGridView2.Columns["btn_Table"].DisplayIndex = dataGridView2.Columns.Count - 1;
 
         }
-        private bool button1Clicked = false;
-        private bool button2Clicked = false;
-        internal static int orderID;
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (button1Clicked || button2Clicked) return;
-            connection = new SqlConnection(str);
-            loadData4();
-            button1Clicked = true;
-            MessageBox.Show("Đã hủy đơn hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
-            return;
+            this.Visible = false;
+            //MessageBox.Show("Đã hủy đơn hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            if (button2Clicked || button1Clicked) return;
-            connection = new SqlConnection(str);
-            loadData3();
-            button2Clicked = true;
-            MessageBox.Show("Đã xác nhận thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
-            return;
+            //MessageBox.Show("Đã xác nhận thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+            this.Visible = false;
         }
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
@@ -156,6 +64,89 @@ namespace QLBH_lastproject.UC_Function
                 DataGridViewRow selectedRow = dataGridView2.SelectedRows[0];
                 string id = selectedRow.Cells["ID"].ToString();
             }
+        }
+
+        private void dataGridView2_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+
+            //dataGridView2.Rows[e.RowIndex].Cells[0].Value = e.RowIndex + 1;
+
+        }
+
+        private void dataGridView2_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if (dataGridView2.Rows[e.RowIndex].Cells[6].Value.ToString() == "Chưa duyệt")
+            {
+                dataGridView2.Rows[e.RowIndex].Cells[0].Value = "Hủy";
+            }
+            else
+            {
+                dataGridView2.Rows[e.RowIndex].Cells[0].Value = "Mua lại";
+            }
+
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView2.Columns[e.ColumnIndex].Name == "btn_Table")
+            {
+                if (dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString() == "Hủy")
+                {
+                    if (MessageBox.Show("Bạn chắc chắn muốn hủy!", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        var s = dataGridView2.Rows[e.RowIndex].Cells[1].Value;
+                        SqlData sql = new SqlData();
+                        sql.UpdateStatusCart((int)s, 2);
+                        MessageBox.Show("hủy thành công");
+                        Dathang_Load(sender, e);
+                    }
+                }
+                else
+                {
+                    //string a =  dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    var s = dataGridView2.Rows[e.RowIndex].Cells[1].Value;
+                    SqlData sql = new SqlData();
+                    //button1.Text = s.ToString();
+                    //DataRow dr = sql.GetAccountonline();
+                    //int i = int.Parse(dr["userID"].ToString());
+                    int i = int.Parse(label1.Name);
+                    DateTime dt = DateTime.Now;
+                    int idOrder = sql.GetIdOrder((int)s);
+                    sql.InserMualai(i, dt, 0, idOrder);
+                    MessageBox.Show("Đặt đơn hàng thành công");
+                    Dathang_Load(sender, e);
+
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Dathang_Load(sender, e);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SqlData sql = new SqlData();
+            dataGridView2.DataSource = sql.FilterCartUser(0, int.Parse(label1.Name));
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            SqlData sql = new SqlData();
+            dataGridView2.DataSource = sql.FilterCartUser(1, int.Parse(label1.Name));
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            SqlData sql = new SqlData();
+            dataGridView2.DataSource = sql.FilterCartUser(2, int.Parse(label1.Name));
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            SqlData sql = new SqlData();
+            dataGridView2.DataSource = sql.FilterCartUser(3, int.Parse(label1.Name));
         }
     }
 }

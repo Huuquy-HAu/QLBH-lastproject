@@ -250,6 +250,7 @@
             Name = "Mainmenu";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Mainmenu";
+            Load += Mainmenu_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);

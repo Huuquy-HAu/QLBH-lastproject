@@ -57,6 +57,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -72,17 +73,18 @@
             // panel1
             // 
             panel1.BackColor = Color.WhiteSmoke;
+            panel1.Controls.Add(button4);
             panel1.Controls.Add(button3);
             panel1.Controls.Add(button2);
             panel1.Controls.Add(button1);
             panel1.Location = new Point(39, 80);
             panel1.Name = "panel1";
-            panel1.Size = new Size(762, 92);
+            panel1.Size = new Size(928, 92);
             panel1.TabIndex = 2;
             // 
             // button3
             // 
-            button3.Location = new Point(546, 30);
+            button3.Location = new Point(496, 30);
             button3.Name = "button3";
             button3.Size = new Size(155, 40);
             button3.TabIndex = 7;
@@ -92,7 +94,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(307, 30);
+            button2.Location = new Point(276, 30);
             button2.Name = "button2";
             button2.Size = new Size(174, 40);
             button2.TabIndex = 6;
@@ -113,26 +115,26 @@
             // panel2
             // 
             panel2.BackColor = Color.LightGray;
-            panel2.Controls.Add(button4);
             panel2.Controls.Add(btnConfirm);
-            panel2.Location = new Point(807, 80);
+            panel2.Location = new Point(973, 80);
             panel2.Name = "panel2";
-            panel2.Size = new Size(327, 92);
+            panel2.Size = new Size(161, 92);
             panel2.TabIndex = 3;
             // 
             // button4
             // 
-            button4.Location = new Point(207, 16);
+            button4.Location = new Point(693, 30);
             button4.Name = "button4";
-            button4.Size = new Size(75, 64);
+            button4.Size = new Size(200, 40);
             button4.TabIndex = 5;
-            button4.Text = "button4";
+            button4.Text = "Hoàn thành";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // btnConfirm
             // 
             btnConfirm.Font = new Font("Microsoft JhengHei", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            btnConfirm.Location = new Point(25, 16);
+            btnConfirm.Location = new Point(15, 20);
             btnConfirm.Name = "btnConfirm";
             btnConfirm.Size = new Size(123, 64);
             btnConfirm.TabIndex = 0;

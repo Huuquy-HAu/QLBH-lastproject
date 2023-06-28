@@ -106,18 +106,40 @@ namespace QLBH_lastproject.ConnectSql
             finally { conn.Close(); }
         }
 
-        public Boolean LoginUser(string u, string p)
+        public DataRow LoginUser(string u, string p)
         {
            
             try
             {
                 conn.Open();
-                sql = @"update [User] set status = @status where @userName = userName  AND @password =  password ";
+                sql = @"select * from [User] where @userName = userName  AND @password =  password ";
                 cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@userName", u);
                 cmd.Parameters.AddWithValue("@password", p);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                DataRow dataRow = dt.Rows[0];
+                return dataRow;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally { conn.Close(); }
+        }
+        public Boolean SetStatus(string status )
+        {
 
-                cmd.Parameters.AddWithValue("@status", "online");
+            try
+            {
+                conn.Open();
+                sql = @"update [User] set status = @status where  @sta = status";
+                cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@sta", status);
+                cmd.Parameters.AddWithValue("@status", "offline");
+    
                 cmd.ExecuteNonQuery();
                 return true;
             }
@@ -128,18 +150,18 @@ namespace QLBH_lastproject.ConnectSql
             }
             finally { conn.Close(); }
         }
-        public Boolean LoginUser(string stus)
+        public Boolean SetStatus(int status)
         {
 
             try
             {
                 conn.Open();
-                sql = @"update [User] set status = @status where  @sta = status";
+                sql = @"update [User] set status = @status where  @sta = userID";
                 cmd = new SqlCommand(sql, conn);
 
-                cmd.Parameters.AddWithValue("@sta", stus);
-                cmd.Parameters.AddWithValue("@status", "offline");
-    
+                cmd.Parameters.AddWithValue("@sta", status);
+                cmd.Parameters.AddWithValue("@status", "online");
+
                 cmd.ExecuteNonQuery();
                 return true;
             }
@@ -234,7 +256,7 @@ namespace QLBH_lastproject.ConnectSql
                     when cartStatusID = 0 then N'Chưa duyệt' 
                     when cartStatusID = 1 then N'Đã duyệt'
                     when cartStatusID = 2 then N'Đã hủy'
-                    else N'Đã hủy'
+                    else N'Hoàn thành'
                 end as status
                 , orderID  
                 FROM [Cart]  
@@ -271,9 +293,47 @@ namespace QLBH_lastproject.ConnectSql
                     when p.cartStatusID = 0 then N'Chưa duyệt' 
                     when p.cartStatusID = 1 then N'Đã duyệt' 
                     when p.cartStatusID = 2 then N'Đã hủy' 
-                    else N'Đã hủy'
+                    else N'Hoàn thành'
                 end as status
                 , p.orderID  
+                FROM [Cart] AS p  
+                LEFT JOIN [User] AS u 
+                ON p.UserID= u.UserID 
+                WHERE @cartStatusID = cartStatusID
+                ";
+
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@cartStatusID", i);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally { conn.Close(); }
+        }
+        public DataTable SeclectStaffCart(int i)
+        {
+            try
+            {
+                conn.Open();
+                /*sql = @"select CartID,UserID,CreateAt,
+                case  
+                    when cartStatusID = 0 then 'Chưa duyệt' else N'Đã duyệt'
+                end as status
+                ,orderID from [Cart]";*/
+
+                sql = @"SELECT p.CartID, u.fullName, p.CreateAt,
+                case  
+                    when p.cartStatusID = 0 then N'Chưa duyệt' 
+                    when p.cartStatusID = 1 then N'Đã duyệt' 
+                    when p.cartStatusID = 2 then N'Đã hủy' 
+                    else N'Hoàn thành'
+                end as status
+                , u.address  
                 FROM [Cart] AS p  
                 LEFT JOIN [User] AS u 
                 ON p.UserID= u.UserID 
@@ -367,5 +427,125 @@ namespace QLBH_lastproject.ConnectSql
             finally { conn.Close(); }
         }
         
+        public DataTable GetCartUser(int i) {
+            try
+            {
+                conn.Open();
+                sql = @"SELECT p.cartID,ps.productName,o.quantity,o.Price, p.CreateAt,
+                case  
+                    when p.cartStatusID = 0 then N'Chưa duyệt' 
+                    when p.cartStatusID = 1 then N'Đã duyệt' 
+                    when p.cartStatusID = 2 then N'Đã hủy' 
+                    else N'Hoàn thành'
+                end as status
+                  
+                FROM [Cart] AS p 
+                LEFT JOIN [User] AS u 
+                ON p.UserID= u.UserID 
+                LEFT JOIN [Order] AS o 
+                ON p.orderID= o.orderID 
+                LEFT JOIN [Product] AS ps
+                ON o.productID= ps.productID 
+                WHERE @userId = p.userID
+                ";
+
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@userId", i);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally { conn.Close(); }
+
+        }
+        public DataTable FilterCartUser(int i , int j)
+        {
+            try
+            {
+                conn.Open();
+                sql = @"SELECT p.cartID,ps.productName,o.quantity,o.Price, p.CreateAt,
+                case  
+                    when p.cartStatusID = 0 then N'Chưa duyệt' 
+                    when p.cartStatusID = 1 then N'Đã duyệt' 
+                    when p.cartStatusID = 2 then N'Đã hủy' 
+                    else N'Đã hủy'
+                end as status
+                  
+                FROM [Cart] AS p 
+                LEFT JOIN [User] AS u 
+                ON p.UserID= u.UserID 
+                LEFT JOIN [Order] AS o 
+                ON p.orderID= o.orderID 
+                LEFT JOIN [Product] AS ps
+                ON o.productID= ps.productID 
+                WHERE @cartStatusID = p.cartStatusID AND @userId = p.userID
+                ";
+
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@cartStatusID", i);
+                cmd.Parameters.AddWithValue("@userId", j);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally { conn.Close(); }
+
+        }
+        public Boolean InserMualai(int b, DateTime c,int d, int e)
+        {
+            try
+            {
+                conn.Open();
+                sql = @"INSERT INTO [Cart] (UserID, CreateAt,cartStatusID, orderID) VALUES (@UserID, @CreateAt, @cartStatusID, @orderID)";
+
+                cmd = new SqlCommand (sql, conn);
+                cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = b;
+
+                cmd.Parameters.Add("@CreateAt", SqlDbType.DateTime).Value = c;
+                cmd.Parameters.Add("@cartStatusID", SqlDbType.Int).Value = d;
+                cmd.Parameters.Add("@orderID", SqlDbType.Int).Value = e;
+                cmd.ExecuteNonQuery();
+                //MessageBox.Show("Thông báo", "Thêm vào giỏ hàng thành công!", MessageBoxButtons.OK);
+                return true;
+              
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally { conn.Close(); }
+        }
+        public int GetIdOrder (int i)
+        {
+            try
+            {
+                conn.Open();
+                sql = @"select * from [Cart] where @cartID = cartID";
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@cartID", i);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                DataRow dataRow = dt.Rows[0];
+
+                return int.Parse(dataRow["orderID"].ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return -1;
+            }
+            finally { conn.Close(); }
+        }
     }
 }

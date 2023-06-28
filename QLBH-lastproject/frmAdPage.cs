@@ -54,7 +54,7 @@ namespace WinFormsApp1
 
                 this.Close();
                 Mainmenu mainmenu = new Mainmenu();
-                mainmenu.Show();
+                mainmenu.Visible = true;
             }
 
             

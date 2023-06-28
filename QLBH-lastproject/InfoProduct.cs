@@ -15,14 +15,14 @@ namespace QLBH_lastproject
 {
     public partial class InfoProduct : Form
     {
-        public InfoProduct(int n, string m)
+        public InfoProduct(int n, string m, int cartId)
         {
             InitializeComponent();
             SqlData sql = new SqlData();
             DataTable dt = new DataTable();
             DataRow dataRow = null;
             string price;
-            pictureBox1.Name = n.ToString();
+            pictureBox1.Name = cartId.ToString();
             if (m != "info")
             {
                 label1.Text = "Thông tin đơn đặt";
@@ -30,7 +30,7 @@ namespace QLBH_lastproject
                 dt = sql.getallOrder(n);
                 dataRow = dt.Rows[0];
                 n = int.Parse(dataRow["productID"].ToString());
-                price = (dataRow["Price"].ToString());
+                //price = (dataRow["Price"].ToString());
                 label8.Text = dataRow["quantity"].ToString();
                 label7.Visible = false;
                 label9.Visible = false;
@@ -119,15 +119,17 @@ namespace QLBH_lastproject
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SqlData sql = new SqlData();                
+            SqlData sql = new SqlData();
             if (button2.Text == "Mua ngay")
             {
                 this.Close();
-            }else
+            }
+            else
             {
                 sql.UpdateStatusCart(int.Parse(pictureBox1.Name), 2);
+                this.Close();
             }
-            
+
 
         }
 
@@ -138,11 +140,11 @@ namespace QLBH_lastproject
             {
                 DataRow dr = sql.GetAccountonline();
                 int userId = int.Parse(dr["userID"].ToString());
-                sql.Insert(userId, int.Parse(label2.Name), int.Parse(label2.Name), int.Parse(label8.Text), decimal.Parse(label14.Name));
+                sql.Insert(userId, int.Parse(label1.Name), int.Parse(label1.Name), int.Parse(label8.Text), decimal.Parse(label14.Text));
             }
             else
             {
-                if (sql.UpdateStatusCart(int.Parse(pictureBox1.Name),1))
+                if (sql.UpdateStatusCart(int.Parse(pictureBox1.Name), 1))
                 {
                     this.Close();
                 }

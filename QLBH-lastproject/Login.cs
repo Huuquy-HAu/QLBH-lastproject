@@ -18,27 +18,28 @@ namespace QLBH_lastproject
             InitializeComponent();
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             SqlData sql = new SqlData();
-            if (!sql.LoginUser(textBox1.Text, textBox2.Text))
+            sql.SetStatus("online");
+            DataRow dr = sql.LoginUser(textBox1.Text, textBox2.Text);
+            if (dr == null)
             {
                 MessageBox.Show("Thông tin tài khoản không chính xác!", "Thông báo", MessageBoxButtons.OK);
             }
             else
             {
-                DataRow dr = sql.GetAccountonline();
+                int n = int.Parse(dr["userID"].ToString());
+                sql.SetStatus(n);
                 int s = int.Parse(dr["roleID"].ToString());
                 if (s == 3)
                 {
-                    sql.LoginUser("online");
                     //MessageBox.Show("Tài khoản này đang tạm khóa!\n Vui lòng liên hệ hotline: 0987503481 để được hỗ trợ", "Thông báo", MessageBoxButtons.OK);
                     MessageBox.Show("Tài khoản này đang tạm khóa!\n Vui lòng liên hệ A Hoàng để được hỗ trợ", "Thông báo", MessageBoxButtons.OK);
+                }else if (s == 4)
+                {
+                    this.Hide();
+                    new Staff().Show();
                 }
                 else
                 {

@@ -25,12 +25,13 @@ namespace QLBH_lastproject
 
         void loadData()
         {
+            table.Clear();
             cmd = conn.CreateCommand();
             cmd.CommandText = "select * from [Order]";
             adapter.SelectCommand = cmd;
-            table.Clear();
             adapter.Fill(table);
             dataGridView1.DataSource = table;
+
 
         }
         public Cart()
@@ -90,7 +91,7 @@ namespace QLBH_lastproject
                     int orderId = int.Parse(selectedRow.Cells["OrderID"].Value.ToString());
                     Dathang dathang = new Dathang();
                     // update the order ID on user control Dathang
-                    dathang.UpdateOrderID(orderId);
+                    //dathang.UpdateOrderID(orderId);
                 }
                 addCartItem(new Dathang());
                 //conn = new SqlConnection(str);
@@ -122,7 +123,7 @@ namespace QLBH_lastproject
             int userid = int.Parse(textBox2.Text);
             int createat = int.Parse(textBox3.Text);
             int orderid = int.Parse(textBox4.Text);
-            getcart = new getCart(cartid, userid, createat, orderid);
+            /*getcart = new getCart(cartid, userid, createat, orderid);
             if (SqlData.Insertcart)
             {
                 dataGridView1.DataSource = data.getallCart();
@@ -130,13 +131,13 @@ namespace QLBH_lastproject
             else
             {
                 MessageBox.Show("Xay ra loi : ", "Khong sua duoc", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }*/
 
             //cmd = conn.CreateCommand();
             //cmd.CommandText = "insert into dbo.Cart values('" + textBox1.Text + "', '" + textBox2.Text + "', '" + textBox3.Text + "','" + textBox4.Text + "')";
             //cmd.ExecuteNonQuery();
             //loadData();
-        }
+
 
             cmd = conn.CreateCommand();
             cmd.CommandText = "delete from [Order] where OrderID = '" + textBox1.Text + "'";
@@ -160,6 +161,11 @@ namespace QLBH_lastproject
         }
         private void label10_Click(object sender, EventArgs e)
         {
+        }
+
+        private void trolai_Click_2(object sender, EventArgs e)
+        {
+
         }
     }
 }
