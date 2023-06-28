@@ -285,20 +285,8 @@
             label8.Name = "label8";
             label8.Size = new Size(79, 15);
             label8.TabIndex = 14;
-<<<<<<< HEAD
             label8.Text = "Giá ";
-            // 
-            // textBox4
-            // 
-            textBox4.Location = new Point(426, 133);
-            textBox4.Name = "textBox4";
-            textBox4.ReadOnly = true;
-            textBox4.Size = new Size(136, 23);
-            textBox4.TabIndex = 9;
-            textBox4.TextAlign = HorizontalAlignment.Right;
-=======
             label8.Text = "Giá sản phẩm";
->>>>>>> 938d915d2cd6bb4b5d97935b7baa0cd22c2c5ebf
             // 
             // Cart
             // 

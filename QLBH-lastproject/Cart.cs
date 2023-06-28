@@ -71,7 +71,7 @@ namespace QLBH_lastproject
         {
 
         }
-<<<<<<< HEAD
+
         private void thanhtoan_Click_1(object sender, EventArgs e)
         {
             if (pricelabel.Text == "")
@@ -104,8 +104,7 @@ namespace QLBH_lastproject
                 //loadData();
             }
         }
-=======
->>>>>>> 938d915d2cd6bb4b5d97935b7baa0cd22c2c5ebf
+
         public delegate void OrderIDChangedEventHandler(int orderId);
         public event OrderIDChangedEventHandler OrderIDChanged;
         private void tinhtong()
@@ -120,19 +119,20 @@ namespace QLBH_lastproject
 
             int i;
             i = dataGridView1.CurrentRow.Index;
-<<<<<<< HEAD
+
             pricelabel.Text = dataGridView1.Rows[i].Cells[5].Value.ToString() + "  VND";
-            textBox1.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
+           /* textBox1.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
             textBox2.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
             textBox3.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
-            textBox4.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();
+            textBox4.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();*/
         }
         private void button2_Click_1(object sender, EventArgs e)
         {
-            int cartid = int.Parse(textBox1.Text);
+         /*   int cartid = int.Parse(textBox1.Text);
             int userid = int.Parse(textBox2.Text);
             int createat = int.Parse(textBox3.Text);
-            int orderid = int.Parse(textBox4.Text);
+            int orderid = int.Parse(textBox4.Text);*/
+
             /*getcart = new getCart(cartid, userid, createat, orderid);
             if (SqlData.Insertcart)
             {
@@ -149,7 +149,7 @@ namespace QLBH_lastproject
             //loadData();
 
 
-            cmd = conn.CreateCommand();
+            /*cmd = conn.CreateCommand();
             cmd.CommandText = "delete from [Order] where OrderID = '" + textBox1.Text + "'";
             cmd.ExecuteNonQuery();
             loadData();
@@ -158,9 +158,9 @@ namespace QLBH_lastproject
             textBox2.Text = "";
             textBox3.Text = "";
             textBox4.Text = "";
-            textBox5.Text = "";
-=======
-            int price = Convert.ToInt32(dataGridView1.Rows[i].Cells[5].Value);
+            textBox5.Text = "";*/
+        
+          /*  int price = Convert.ToInt32(dataGridView1.Rows[i].Cells[5].Value);
             int quantity = Convert.ToInt32(dataGridView1.Rows[i].Cells[4].Value);
             double totalPrice = price * quantity;
             dataGridView1.CurrentCell = dataGridView1.Rows[i].Cells[0];
@@ -170,8 +170,7 @@ namespace QLBH_lastproject
             label11.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
             label12.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
             label13.Text = dataGridView1.Rows[i].Cells[5].Value.ToString();
-            textBox5.Text = dataGridView1.Rows[i].Cells[4].Value.ToString();
->>>>>>> 938d915d2cd6bb4b5d97935b7baa0cd22c2c5ebf
+            textBox5.Text = dataGridView1.Rows[i].Cells[4].Value.ToString();*/
         }
         private void label1_Click(object sender, EventArgs e)
         {
@@ -186,12 +185,12 @@ namespace QLBH_lastproject
         {
         }
 
-<<<<<<< HEAD
+
         private void trolai_Click_2(object sender, EventArgs e)
         {
 
         }
-=======
+
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
         }
@@ -243,7 +242,7 @@ namespace QLBH_lastproject
                 {
                     DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
                     int orderId = int.Parse(selectedRow.Cells["OrderID"].Value.ToString());
-                    dathang.UpdateOrderID(orderId);
+                   // dathang.UpdateOrderID(orderId);
                 }
             }
         }
@@ -267,6 +266,6 @@ namespace QLBH_lastproject
 
         }
 
->>>>>>> 938d915d2cd6bb4b5d97935b7baa0cd22c2c5ebf
+
     }
 }
