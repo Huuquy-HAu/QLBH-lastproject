@@ -72,9 +72,12 @@ namespace WinFormsApp1
             dataGridView1.Font = new Font("Arial", 11);
         }
 
-        void increaseID()
+        void clearValue()
         {
-            ++a;
+            txtProID.Clear();
+            txtName.Clear();
+            txtPrice.Clear();
+            txtDescription.Clear();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -85,19 +88,28 @@ namespace WinFormsApp1
             txtProID.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
             txtName.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
             txtDescription.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
-            txtQuantity.Text = dataGridView1.Rows[i].Cells[4].Value.ToString();
             txtPrice.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();
         }
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            increaseID();
-            sqlCmd = sqlCon.CreateCommand();
-            sqlCmd.CommandText = "INSERT INTO Product(productID,productName, description, price, quantity) VALUES" +
-                "('" + a + "','" + txtName.Text + "','" + txtDescription.Text + "','" + txtPrice.Text + "','" + txtQuantity.Text + "')";
-            sqlCmd.ExecuteNonQuery();
+            if (ValidateChildren(ValidationConstraints.Enabled) && validPrice())
+            {
+                sqlCmd = sqlCon.CreateCommand();
+                sqlCmd.CommandText = "INSERT INTO Product(productName, description, price) VALUES" +
+                "('" + txtName.Text + "','" + txtDescription.Text + "','" + txtPrice.Text + "')";
+                sqlCmd.ExecuteNonQuery();
 
-            loadData();
+                loadData();
+                MessageBox.Show("Add successful!", "Message", MessageBoxButtons.OK);
+                clearValue();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin hợp lệ!", "Message", MessageBoxButtons.OK);
+            }
+
+
         }
 
         private void btnDelProduct_Click(object sender, EventArgs e)
@@ -111,17 +123,87 @@ namespace WinFormsApp1
                 sqlCmd.ExecuteNonQuery();
 
                 loadData();
+                clearValue();
             }
 
         }
 
         private void btnUpdateProduct_Click(object sender, EventArgs e)
         {
-            sqlCmd = sqlCon.CreateCommand();
-            sqlCmd.CommandText = "update Product set productName = N'" + txtName.Text + "',description = N'" + txtDescription.Text + "',price = N'" + txtPrice.Text + "',quantity = N'" + txtQuantity.Text + "' where productID = '" + txtProID.Text + "'";
-            sqlCmd.ExecuteNonQuery();
+            if (ValidateChildren(ValidationConstraints.Enabled) && validPrice())
+            {
+                sqlCmd = sqlCon.CreateCommand();
+                sqlCmd.CommandText = "update Product set productName = N'" + txtName.Text + "',description = N'" + txtDescription.Text + "',price = N'" + txtPrice.Text + "' where productID = '" + txtProID.Text + "'";
+                sqlCmd.ExecuteNonQuery();
 
-            loadData();
+                loadData();
+                MessageBox.Show("Update successful!", "Message", MessageBoxButtons.OK);
+                clearValue();
+            }
+
+        }
+
+        private void txtName_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtName.Text))
+            {
+                e.Cancel = true;
+                txtName.Focus();
+                errorProvider1.SetError(txtName, "Please enter product name!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider1.SetError(txtName, null);
+            }
+        }
+
+        private bool validPrice()
+        {
+            string price = txtPrice.Text;
+            string priceN = price.Substring(0,price.Length - 1);
+            int priceNum = 0;
+            if (price.Length > 0)
+            {
+                priceNum = int.Parse(priceN);
+                if (priceNum < 0)
+                {
+                    MessageBox.Show("Product price must be positive!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtPrice.Focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private void txtPrice_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtPrice.Text))
+            {
+                e.Cancel = true;
+                txtPrice.Focus();
+                errorProvider1.SetError(txtPrice, "Please enter product price!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider1.SetError(txtName, null);
+            }
+        }
+
+        private void txtDescription_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtDescription.Text))
+            {
+                e.Cancel = true;
+                txtDescription.Focus();
+                errorProvider1.SetError(txtDescription, "Please enter product description!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider1.SetError(txtName, null);
+            }
         }
     }
 }

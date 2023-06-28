@@ -28,23 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label1 = new Label();
             dataGridView1 = new DataGridView();
-            clProductId = new DataGridViewTextBoxColumn();
-            clProductName = new DataGridViewTextBoxColumn();
-            clDescription = new DataGridViewTextBoxColumn();
-            clQuantity = new DataGridViewTextBoxColumn();
-            clPrice = new DataGridViewTextBoxColumn();
             pnlProductDetail = new Panel();
+            label4 = new Label();
             txtProID = new TextBox();
             label2 = new Label();
             txtDescription = new TextBox();
             txtPrice = new TextBox();
-            txtQuantity = new TextBox();
             txtName = new TextBox();
             label6 = new Label();
             label5 = new Label();
-            label4 = new Label();
             label3 = new Label();
             pnlBtn = new Panel();
             btnDelProduct = new Button();
@@ -52,10 +47,16 @@
             btnAddProduct = new Button();
             panel1 = new Panel();
             btnClose = new Button();
+            errorProvider1 = new ErrorProvider(components);
+            clProductId = new DataGridViewTextBoxColumn();
+            clProductName = new DataGridViewTextBoxColumn();
+            clDescription = new DataGridViewTextBoxColumn();
+            clPrice = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             pnlProductDetail.SuspendLayout();
             pnlBtn.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -71,7 +72,7 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { clProductId, clProductName, clDescription, clQuantity, clPrice });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { clProductId, clProductName, clDescription, clPrice });
             dataGridView1.Location = new Point(61, 76);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
@@ -80,80 +81,47 @@
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
-            // clProductId
-            // 
-            clProductId.DataPropertyName = "productID";
-            clProductId.HeaderText = "Mã sản phẩm";
-            clProductId.MinimumWidth = 6;
-            clProductId.Name = "clProductId";
-            clProductId.ReadOnly = true;
-            clProductId.Resizable = DataGridViewTriState.False;
-            clProductId.Width = 125;
-            // 
-            // clProductName
-            // 
-            clProductName.DataPropertyName = "productName";
-            clProductName.HeaderText = "Tên sản phẩm";
-            clProductName.MinimumWidth = 6;
-            clProductName.Name = "clProductName";
-            clProductName.Width = 160;
-            // 
-            // clDescription
-            // 
-            clDescription.DataPropertyName = "description";
-            clDescription.HeaderText = "Mô tả";
-            clDescription.MinimumWidth = 6;
-            clDescription.Name = "clDescription";
-            clDescription.Width = 160;
-            // 
-            // clQuantity
-            // 
-            clQuantity.DataPropertyName = "quantity";
-            clQuantity.HeaderText = "Số lượng";
-            clQuantity.MinimumWidth = 6;
-            clQuantity.Name = "clQuantity";
-            clQuantity.Width = 120;
-            // 
-            // clPrice
-            // 
-            clPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            clPrice.DataPropertyName = "price";
-            clPrice.HeaderText = "Giá";
-            clPrice.MinimumWidth = 6;
-            clPrice.Name = "clPrice";
-            // 
             // pnlProductDetail
             // 
             pnlProductDetail.BackColor = Color.WhiteSmoke;
+            pnlProductDetail.Controls.Add(label4);
             pnlProductDetail.Controls.Add(txtProID);
             pnlProductDetail.Controls.Add(label2);
             pnlProductDetail.Controls.Add(txtDescription);
             pnlProductDetail.Controls.Add(txtPrice);
-            pnlProductDetail.Controls.Add(txtQuantity);
             pnlProductDetail.Controls.Add(txtName);
             pnlProductDetail.Controls.Add(label6);
             pnlProductDetail.Controls.Add(label5);
-            pnlProductDetail.Controls.Add(label4);
             pnlProductDetail.Controls.Add(label3);
             pnlProductDetail.Location = new Point(834, 76);
             pnlProductDetail.Name = "pnlProductDetail";
             pnlProductDetail.Size = new Size(304, 316);
             pnlProductDetail.TabIndex = 2;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(260, 172);
+            label4.Name = "label4";
+            label4.Size = new Size(24, 25);
+            label4.TabIndex = 12;
+            label4.Text = "$";
+            // 
             // txtProID
             // 
             txtProID.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtProID.Location = new Point(132, 15);
+            txtProID.Location = new Point(120, 52);
             txtProID.Name = "txtProID";
             txtProID.ReadOnly = true;
-            txtProID.Size = new Size(152, 34);
+            txtProID.Size = new Size(134, 34);
             txtProID.TabIndex = 11;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(18, 18);
+            label2.Location = new Point(21, 55);
             label2.Name = "label2";
             label2.Size = new Size(70, 25);
             label2.TabIndex = 10;
@@ -162,40 +130,35 @@
             // txtDescription
             // 
             txtDescription.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDescription.Location = new Point(132, 267);
+            txtDescription.Location = new Point(120, 233);
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(152, 34);
+            txtDescription.Size = new Size(134, 34);
             txtDescription.TabIndex = 9;
+            txtDescription.Validating += txtDescription_Validating;
             // 
             // txtPrice
             // 
             txtPrice.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtPrice.Location = new Point(132, 203);
+            txtPrice.Location = new Point(120, 169);
             txtPrice.Name = "txtPrice";
-            txtPrice.Size = new Size(152, 34);
+            txtPrice.Size = new Size(134, 34);
             txtPrice.TabIndex = 8;
-            // 
-            // txtQuantity
-            // 
-            txtQuantity.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtQuantity.Location = new Point(132, 132);
-            txtQuantity.Name = "txtQuantity";
-            txtQuantity.Size = new Size(152, 34);
-            txtQuantity.TabIndex = 7;
+            txtPrice.Validating += txtPrice_Validating;
             // 
             // txtName
             // 
             txtName.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtName.Location = new Point(132, 69);
+            txtName.Location = new Point(120, 106);
             txtName.Name = "txtName";
-            txtName.Size = new Size(152, 34);
+            txtName.Size = new Size(134, 34);
             txtName.TabIndex = 6;
+            txtName.Validating += txtName_Validating;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(13, 270);
+            label6.Location = new Point(16, 236);
             label6.Name = "label6";
             label6.Size = new Size(67, 25);
             label6.TabIndex = 4;
@@ -205,27 +168,17 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(18, 206);
+            label5.Location = new Point(21, 172);
             label5.Name = "label5";
             label5.Size = new Size(43, 25);
             label5.TabIndex = 3;
             label5.Text = "Giá";
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(18, 141);
-            label4.Name = "label4";
-            label4.Size = new Size(91, 25);
-            label4.TabIndex = 2;
-            label4.Text = "Số lượng";
-            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(18, 72);
+            label3.Location = new Point(21, 109);
             label3.Name = "label3";
             label3.Size = new Size(46, 25);
             label3.TabIndex = 1;
@@ -307,6 +260,47 @@
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
+            // clProductId
+            // 
+            clProductId.DataPropertyName = "productID";
+            clProductId.HeaderText = "Mã sản phẩm";
+            clProductId.MinimumWidth = 6;
+            clProductId.Name = "clProductId";
+            clProductId.ReadOnly = true;
+            clProductId.Resizable = DataGridViewTriState.False;
+            clProductId.Width = 125;
+            // 
+            // clProductName
+            // 
+            clProductName.DataPropertyName = "productName";
+            clProductName.HeaderText = "Tên sản phẩm";
+            clProductName.MinimumWidth = 6;
+            clProductName.Name = "clProductName";
+            clProductName.ReadOnly = true;
+            clProductName.Width = 160;
+            // 
+            // clDescription
+            // 
+            clDescription.DataPropertyName = "description";
+            clDescription.HeaderText = "Mô tả";
+            clDescription.MinimumWidth = 6;
+            clDescription.Name = "clDescription";
+            clDescription.ReadOnly = true;
+            clDescription.Width = 200;
+            // 
+            // clPrice
+            // 
+            clPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            clPrice.DataPropertyName = "price";
+            clPrice.HeaderText = "Giá";
+            clPrice.MinimumWidth = 6;
+            clPrice.Name = "clPrice";
+            clPrice.ReadOnly = true;
+            // 
             // UC_AllProducts
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -326,6 +320,7 @@
             pnlBtn.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -337,23 +332,22 @@
         private Panel pnlBtn;
         private TextBox txtDescription;
         private TextBox txtPrice;
-        private TextBox txtQuantity;
         private TextBox txtName;
         private Label label6;
         private Label label5;
-        private Label label4;
         private Label label3;
         private Button btnDelProduct;
         private Button btnUpdateProduct;
         private Button btnAddProduct;
         private Panel panel1;
         private Button btnClose;
+        private TextBox txtProID;
+        private Label label2;
+        private ErrorProvider errorProvider1;
+        private Label label4;
         private DataGridViewTextBoxColumn clProductId;
         private DataGridViewTextBoxColumn clProductName;
         private DataGridViewTextBoxColumn clDescription;
-        private DataGridViewTextBoxColumn clQuantity;
         private DataGridViewTextBoxColumn clPrice;
-        private TextBox txtProID;
-        private Label label2;
     }
 }

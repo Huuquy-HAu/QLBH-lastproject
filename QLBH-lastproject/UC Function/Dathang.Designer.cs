@@ -112,7 +112,10 @@
             // 
             // dataGridView2
             // 
+<<<<<<< HEAD
             dataGridView2.AllowUserToAddRows = false;
+=======
+>>>>>>> 938d915d2cd6bb4b5d97935b7baa0cd22c2c5ebf
             dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView2.BackgroundColor = SystemColors.Control;
             dataGridView2.BorderStyle = BorderStyle.Fixed3D;
@@ -121,7 +124,11 @@
             dataGridView2.Location = new Point(47, 97);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
+<<<<<<< HEAD
             dataGridView2.Size = new Size(821, 298);
+=======
+            dataGridView2.Size = new Size(927, 103);
+>>>>>>> 938d915d2cd6bb4b5d97935b7baa0cd22c2c5ebf
             dataGridView2.TabIndex = 5;
             dataGridView2.CellClick += dataGridView2_CellClick;
             dataGridView2.RowPostPaint += dataGridView2_RowPostPaint;
