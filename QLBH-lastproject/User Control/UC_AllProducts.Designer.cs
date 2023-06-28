@@ -31,6 +31,10 @@
             components = new System.ComponentModel.Container();
             label1 = new Label();
             dataGridView1 = new DataGridView();
+            clProductId = new DataGridViewTextBoxColumn();
+            clProductName = new DataGridViewTextBoxColumn();
+            clDescription = new DataGridViewTextBoxColumn();
+            clPrice = new DataGridViewTextBoxColumn();
             pnlProductDetail = new Panel();
             label4 = new Label();
             txtProID = new TextBox();
@@ -48,10 +52,6 @@
             panel1 = new Panel();
             btnClose = new Button();
             errorProvider1 = new ErrorProvider(components);
-            clProductId = new DataGridViewTextBoxColumn();
-            clProductName = new DataGridViewTextBoxColumn();
-            clDescription = new DataGridViewTextBoxColumn();
-            clPrice = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             pnlProductDetail.SuspendLayout();
             pnlBtn.SuspendLayout();
@@ -80,6 +80,43 @@
             dataGridView1.Size = new Size(767, 395);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // clProductId
+            // 
+            clProductId.DataPropertyName = "productID";
+            clProductId.HeaderText = "Mã sản phẩm";
+            clProductId.MinimumWidth = 6;
+            clProductId.Name = "clProductId";
+            clProductId.ReadOnly = true;
+            clProductId.Resizable = DataGridViewTriState.False;
+            clProductId.Width = 125;
+            // 
+            // clProductName
+            // 
+            clProductName.DataPropertyName = "productName";
+            clProductName.HeaderText = "Tên sản phẩm";
+            clProductName.MinimumWidth = 6;
+            clProductName.Name = "clProductName";
+            clProductName.ReadOnly = true;
+            clProductName.Width = 160;
+            // 
+            // clDescription
+            // 
+            clDescription.DataPropertyName = "description";
+            clDescription.HeaderText = "Mô tả";
+            clDescription.MinimumWidth = 6;
+            clDescription.Name = "clDescription";
+            clDescription.ReadOnly = true;
+            clDescription.Width = 200;
+            // 
+            // clPrice
+            // 
+            clPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            clPrice.DataPropertyName = "price";
+            clPrice.HeaderText = "Giá";
+            clPrice.MinimumWidth = 6;
+            clPrice.Name = "clPrice";
+            clPrice.ReadOnly = true;
             // 
             // pnlProductDetail
             // 
@@ -263,43 +300,6 @@
             // errorProvider1
             // 
             errorProvider1.ContainerControl = this;
-            // 
-            // clProductId
-            // 
-            clProductId.DataPropertyName = "productID";
-            clProductId.HeaderText = "Mã sản phẩm";
-            clProductId.MinimumWidth = 6;
-            clProductId.Name = "clProductId";
-            clProductId.ReadOnly = true;
-            clProductId.Resizable = DataGridViewTriState.False;
-            clProductId.Width = 125;
-            // 
-            // clProductName
-            // 
-            clProductName.DataPropertyName = "productName";
-            clProductName.HeaderText = "Tên sản phẩm";
-            clProductName.MinimumWidth = 6;
-            clProductName.Name = "clProductName";
-            clProductName.ReadOnly = true;
-            clProductName.Width = 160;
-            // 
-            // clDescription
-            // 
-            clDescription.DataPropertyName = "description";
-            clDescription.HeaderText = "Mô tả";
-            clDescription.MinimumWidth = 6;
-            clDescription.Name = "clDescription";
-            clDescription.ReadOnly = true;
-            clDescription.Width = 200;
-            // 
-            // clPrice
-            // 
-            clPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            clPrice.DataPropertyName = "price";
-            clPrice.HeaderText = "Giá";
-            clPrice.MinimumWidth = 6;
-            clPrice.Name = "clPrice";
-            clPrice.ReadOnly = true;
             // 
             // UC_AllProducts
             // 

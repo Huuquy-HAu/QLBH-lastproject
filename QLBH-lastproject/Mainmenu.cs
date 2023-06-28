@@ -49,7 +49,7 @@ namespace QLBH_lastproject
         {
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string relativePath = Path.Combine("..", "img", id + ".bmp");
-            string fullPath = @"C:\Users\ASUS\Source\Repos\QLBH-lastproject\QLBH-lastproject\img\" + id + ".bmp";
+            string fullPath = @"D:\CS project\QLBH_Test\QLBH-lastproject\QLBH-lastproject\img\" + id + ".bmp";
 
             Panel penl = new Panel();
             //penl.Size = new Size(153, 210);

@@ -39,7 +39,7 @@ namespace WinFormsApp1
                 sqlCon.Close();
             }
         }
-        private void UC_AllProducts_Load(object sender, EventArgs e)
+        public void UC_AllProducts_Load(object sender, EventArgs e)
         {
             try
             {
@@ -51,8 +51,8 @@ namespace WinFormsApp1
                 if (sqlCon.State == ConnectionState.Closed)
                 {
                     sqlCon.Open();
-                    loadData();
                 }
+                    loadData();
             }
             catch (Exception ex)
             {
@@ -161,7 +161,7 @@ namespace WinFormsApp1
         private bool validPrice()
         {
             string price = txtPrice.Text;
-            string priceN = price.Substring(0,price.Length - 1);
+            string priceN = price.Substring(0, price.Length - 1);
             int priceNum = 0;
             if (price.Length > 0)
             {
