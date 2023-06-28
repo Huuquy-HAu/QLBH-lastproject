@@ -133,5 +133,15 @@ namespace QLBH_lastproject.UC_Function
             SqlData sql = new SqlData();
             dataGridView2.DataSource = sql.FilterCartUser(3, int.Parse(label1.Name));
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Visible=false;
+        }
     }
 }
