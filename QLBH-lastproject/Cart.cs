@@ -16,256 +16,134 @@ namespace QLBH_lastproject
 {
     public partial class Cart : Form
     {
-        SqlConnection conn;
-        SqlCommand cmd;
-
-        private string str = "Data Source=.\\sqlexpress;Initial Catalog=QLBH_WPF;Integrated Security=True; trustServerCertificate = true";
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataTable table = new DataTable();
-
-        void loadData()
-        {
-            table.Clear();
-            cmd = conn.CreateCommand();
-            cmd.CommandText = "select * from [Order]";
-            adapter.SelectCommand = cmd;
-            adapter.Fill(table);
-            dataGridView1.DataSource = table;
-
-
-        }
+        SqlData sql = new SqlData();
         public Cart()
         {
             InitializeComponent();
+            label1.Name = sql.GetAccountonline()["userID"].ToString();
         }
-
-        private void trolai_Click(object sender, EventArgs e)
+        private void Cart_Load(object sender, EventArgs e)
         {
-            Mainmenu mainmenu = new Mainmenu();
-            this.Hide();
-            mainmenu.Show();
-            mainmenu.BringToFront();
-        }
-        private void trolai_Click_1(object sender, EventArgs e)
-        {
-            Mainmenu mainmenu = new Mainmenu();
-            this.Hide();
-            mainmenu.Show();
-            mainmenu.BringToFront();
-        }
-        private void Cart_Load_1(object sender, EventArgs e)
-        {
-
-            conn = new SqlConnection(str);
-            conn.Open();
-            loadData();
-        }
-        private void addCartItem(UserControl userControl)
-        {
-            userControl.Dock = DockStyle.Fill;
-            PnlMain.Controls.Clear();
-            PnlMain.Controls.Add(userControl);
-            userControl.BringToFront();
-        }
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
+            dataGridView1.DataSource = sql.getallOrder(int.Parse(label1.Name));
+            dataGridView1.Columns["btn_Xoa"].DisplayIndex = dataGridView1.ColumnCount - 1;
+            dataGridView1.Columns["btn_Down"].DisplayIndex = 7;
+            dataGridView1.Columns["btn_Up"].DisplayIndex = 8;
+            dataGridView1.Columns["check"].DisplayIndex = 0;
+            dataGridView1.Columns["orderID"].HeaderText = "Mã đơn";
+            dataGridView1.Columns["productName"].HeaderText = "Tên sản phẩm";
+            dataGridView1.Columns["quantity"].HeaderText = "Số lượng";
+            dataGridView1.Columns["Price1"].HeaderText = "Thành tiền";
+            dataGridView1.Columns["price"].HeaderText = "Đơn giá";
+            TinhTien();
 
         }
 
-        private void thanhtoan_Click_1(object sender, EventArgs e)
+
+        private void TinhTien()
         {
-            if (pricelabel.Text == "")
+            int sum = 0;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                MessageBox.Show("Chưa chọn mã giỏ hàng!", "Không thể đặt hàng", MessageBoxButtons.OK, MessageBoxIcon.None);
-                return;
-            }
-            else if (textBox5.Text == "0")
-            {
-                MessageBox.Show("Vui lòng thêm số lượng!", "Không thể đặt hàng", MessageBoxButtons.OK, MessageBoxIcon.None);
-                return;
-            }
-            else
-            {
-                if (dataGridView1.SelectedRows.Count > 0)
+                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[3];
+                if (chk.Value != chk.TrueValue)
                 {
-                    DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
-                    int orderId = int.Parse(selectedRow.Cells["OrderID"].Value.ToString());
-                    Dathang dathang = new Dathang();
-                    // update the order ID on user control Dathang
-                    //dathang.UpdateOrderID(orderId);
+                    sum += int.Parse(row.Cells[10].Value.ToString());
+
                 }
-                addCartItem(new Dathang());
-                //conn = new SqlConnection(str);
-                //conn.Open();
-                //int selectedValue = int.Parse(textBox1.Text);
-
-                //cmd.CommandText = "SELECT OrderID FROM [Order] WHERE OrderID = " + selectedValue;
-                //cmd.ExecuteNonQuery();
-                //loadData();
             }
+            pricelabel.Text = sum.ToString();
         }
 
-        public delegate void OrderIDChangedEventHandler(int orderId);
-        public event OrderIDChangedEventHandler OrderIDChanged;
-        private void tinhtong()
-        {
-            int t = int.Parse(label13.Text);
-            int n = int.Parse(textBox5.Text);
-            int p = t * n;
-            pricelabel.Text = p.ToString();
-        }
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-            int i;
-            i = dataGridView1.CurrentRow.Index;
-
-            pricelabel.Text = dataGridView1.Rows[i].Cells[5].Value.ToString() + "  VND";
-           /* textBox1.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
-            textBox2.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
-            textBox3.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
-            textBox4.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();*/
-        }
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-         /*   int cartid = int.Parse(textBox1.Text);
-            int userid = int.Parse(textBox2.Text);
-            int createat = int.Parse(textBox3.Text);
-            int orderid = int.Parse(textBox4.Text);*/
-
-            /*getcart = new getCart(cartid, userid, createat, orderid);
-            if (SqlData.Insertcart)
-            {
-                dataGridView1.DataSource = data.getallCart();
-            }
-            else
-            {
-                MessageBox.Show("Xay ra loi : ", "Khong sua duoc", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
-
-            //cmd = conn.CreateCommand();
-            //cmd.CommandText = "insert into dbo.Cart values('" + textBox1.Text + "', '" + textBox2.Text + "', '" + textBox3.Text + "','" + textBox4.Text + "')";
-            //cmd.ExecuteNonQuery();
-            //loadData();
-
-
-            /*cmd = conn.CreateCommand();
-            cmd.CommandText = "delete from [Order] where OrderID = '" + textBox1.Text + "'";
-            cmd.ExecuteNonQuery();
-            loadData();
-            pricelabel.Text = "";
-            textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
-            textBox4.Text = "";
-            textBox5.Text = "";*/
-        
-          /*  int price = Convert.ToInt32(dataGridView1.Rows[i].Cells[5].Value);
-            int quantity = Convert.ToInt32(dataGridView1.Rows[i].Cells[4].Value);
-            double totalPrice = price * quantity;
-            dataGridView1.CurrentCell = dataGridView1.Rows[i].Cells[0];
-            dataGridView1.Focus();
-            pricelabel.Text = totalPrice.ToString() + " VND";
-            label10.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
-            label11.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
-            label12.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
-            label13.Text = dataGridView1.Rows[i].Cells[5].Value.ToString();
-            textBox5.Text = dataGridView1.Rows[i].Cells[4].Value.ToString();*/
-        }
-        private void label1_Click(object sender, EventArgs e)
-        {
-        }
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-        }
-        private void label10_Click(object sender, EventArgs e)
-        {
-        }
-
-
-        private void trolai_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-        }
-        private bool m = false;
-
-        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter) // Kiểm tra nếu ấn phím Enter
-            {
-                int i = dataGridView1.CurrentRow.Index;
-                int orderID = Convert.ToInt32(dataGridView1.Rows[i].Cells[0].Value);
-                int quantity = Convert.ToInt32(textBox5.Text);
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE [Order] SET quantity = " + quantity + " WHERE OrderID = " + orderID;
-                cmd.ExecuteNonQuery();
-                loadData();
-                dataGridView1.CurrentCell = dataGridView1.Rows[i].Cells[0];
-                dataGridView1.Focus();
-                int price = Convert.ToInt32(dataGridView1.Rows[i].Cells[5].Value);
-                int quan = Convert.ToInt32(dataGridView1.Rows[i].Cells[4].Value);
-                double totalPrice = price * quan;
-                pricelabel.Text = totalPrice.ToString() + " VND";
-            }
-        }
 
         private void thanhtoan_Click(object sender, EventArgs e)
         {
-            if (pricelabel.Text == "" || pricelabel.Text == "0")
+            int s;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                MessageBox.Show("Chưa chọn mã giỏ hàng!", "Không thể đặt hàng", MessageBoxButtons.OK, MessageBoxIcon.None);
-                return;
-            }
-            else if (textBox5.Text == "0" || textBox5.Text == "")
-            {
-                MessageBox.Show("Vui lòng thêm số lượng!", "Không thể đặt hàng", MessageBoxButtons.OK, MessageBoxIcon.None);
-                return;
-            }
-            else
-            {
-                Dathang dathang = new Dathang();
-                addCartItem(dathang);
-                conn = new SqlConnection(str);
-                conn.Open();
-                int selectedValue = int.Parse(label10.Text);
-                cmd.CommandText = "SELECT OrderID FROM [Order] WHERE OrderID = " + selectedValue;
-                cmd.ExecuteNonQuery();
-                loadData();
-                if (dataGridView1.SelectedRows.Count > 0)
+                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[3];
+                if (chk.Value != chk.TrueValue)
                 {
-                    DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
-                    int orderId = int.Parse(selectedRow.Cells["OrderID"].Value.ToString());
-                   // dathang.UpdateOrderID(orderId);
+                    s = int.Parse(row.Cells[4].Value.ToString());
+                    thanhtoan.Text = s.ToString();
+                    sql.UpdatestatusOrder(int.Parse(thanhtoan.Text));
+                    sql.InserMualai(int.Parse(label1.Name), DateTime.Now, 0, s);
+
                 }
             }
+            dataGridView1.DataSource = sql.getallOrder(int.Parse(label1.Name));
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            cmd = conn.CreateCommand();
-            cmd.CommandText = "delete from [Order] where OrderID = '" + label10.Text + "'";
-            cmd.ExecuteNonQuery();
-            loadData();
-            pricelabel.Text = "";
-            label10.Text = "";
-            label11.Text = "";
-            label12.Text = "";
-            label13.Text = "";
-            textBox5.Text = "";
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
+           
         }
 
+        private void trolai_Click_2(object sender, EventArgs e)
+        {
+            int s = int.Parse(sql.GetAccountonline()["roleID"].ToString());
+            new Mainmenu(s).Show();
+            this.Close();
+        }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "btn_Xoa")
+            {
+                if (MessageBox.Show("Bạn muốn xóa đơn hàng ?", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    var s = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                    thanhtoan.Text = s;
+                    sql.DeleteOrder(int.Parse(s));
+                    dataGridView1.DataSource = sql.getallOrder(int.Parse(label1.Name));
+
+                }
+            }
+            else if (dataGridView1.Columns[e.ColumnIndex].Name == "btn_Down")
+            {
+
+                var s = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
+                var id = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                var price = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
+                int total = int.Parse(s);
+                total -= 1;
+                int thanhtien = total * int.Parse(price);
+                //dataGridView1.Rows[e.RowIndex].Cells[9].Value = total.ToString();
+
+                dataGridView1.Rows[e.RowIndex].Cells[9].Value = total.ToString();
+                dataGridView1.Rows[e.RowIndex].Cells[10].Value = thanhtien;
+                sql.UpdateTotalOrder(total, int.Parse(id), thanhtien);
+            }
+            else if (dataGridView1.Columns[e.ColumnIndex].Name == "btn_Up")
+            {
+                var s = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
+                var price = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
+                int total = int.Parse(s);
+                total += 1;
+                int thanhtien = total * int.Parse(price);
+                dataGridView1.Rows[e.RowIndex].Cells[9].Value = total;
+                dataGridView1.Rows[e.RowIndex].Cells[10].Value = thanhtien;
+                var id = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                //thanhtoan.Text = price.ToString();
+
+                sql.UpdateTotalOrder(total, int.Parse(id), thanhtien);
+
+            }
+            else if (dataGridView1.Columns[e.ColumnIndex].Name == "check")
+            {
+                //DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)dataGridView1.Rows[e.RowIndex].Cells[3];
+                if (dataGridView1.Rows[e.RowIndex].Cells[3].Value == null)
+                {
+                    dataGridView1.Rows[e.RowIndex].Cells[3].Value = true;
+                    TinhTien();
+                }
+                else
+                {
+                    dataGridView1.Rows[e.RowIndex].Cells[3].Value = null;
+                    TinhTien();
+                }
+
+            }
+
+        }
     }
 }

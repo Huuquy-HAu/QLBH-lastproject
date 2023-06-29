@@ -24,7 +24,7 @@ namespace WinFormsApp1
             activeForm = false;
             foreach (var pnl in tableLayoutPanel1.Controls.OfType<Panel>())
                 pnl.BackColor = Color.Silver;
-                Button btn = (Button)sender;
+            Button btn = (Button)sender;
             switch (btn.Name)
             {
                 case "BtnAllProduct":
@@ -46,7 +46,7 @@ namespace WinFormsApp1
         }
         private void btnCLose_Click(object sender, EventArgs e)
         {
-            
+
             DialogResult dialogResult;
             dialogResult = MessageBox.Show("Are you sure to close this?", "CLose Message", MessageBoxButtons.OK, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.OK)
@@ -57,7 +57,14 @@ namespace WinFormsApp1
                 mainmenu.Visible = true;
             }
 
-            
+
+        }
+
+        private void frmAdPage_Load(object sender, EventArgs e)
+        {
+            activeForm = true;
+            add_UControls(new UC_AllProducts());
+            pnlProducts.BackColor = Color.White;
         }
     }
 }

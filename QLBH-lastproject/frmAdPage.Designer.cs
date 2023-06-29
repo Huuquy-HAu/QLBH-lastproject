@@ -63,7 +63,7 @@
             label1.Font = new Font("Microsoft JhengHei", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(25, 15);
             label1.Name = "label1";
-            label1.Size = new Size(194, 34);
+            label1.Size = new Size(152, 27);
             label1.TabIndex = 1;
             label1.Text = "Trang quản trị";
             // 
@@ -206,6 +206,7 @@
             Padding = new Padding(5);
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
+            Load += frmAdPage_Load;
             pnlTop.ResumeLayout(false);
             pnlTop.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);

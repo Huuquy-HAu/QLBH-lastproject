@@ -47,7 +47,50 @@ namespace QLBH_lastproject.ConnectSql
             }
             finally { conn.Close(); }
         }
-
+        public Boolean UpdateUser(int i, string a, string b, string c)
+        {
+            try
+            {
+                conn.Open();
+                sql = @"update [User] set fullName = @name , phone = @num, address = @dt where @userID = userID";
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@name", a);
+                cmd.Parameters.AddWithValue("@num", b);
+                cmd.Parameters.AddWithValue("@dt", c);
+                cmd.Parameters.AddWithValue("@userID", i);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                MessageBox.Show("Cập nhật thành công!", "Thông báo", MessageBoxButtons.OK);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally { conn.Close(); }
+        }
+        public Boolean UpdatePassWord(int id,string i )
+        {
+            try
+            {
+                conn.Open();
+                sql = @"update [User] set password = @pass where @userID = userID";
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@pass", i);
+                cmd.Parameters.AddWithValue("@userID", id);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                MessageBox.Show("Cập nhật thành công!", "Thông báo", MessageBoxButtons.OK);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally { conn.Close(); }
+        }
         public DataTable Seclection(int i)
         {
             try
@@ -200,7 +243,7 @@ namespace QLBH_lastproject.ConnectSql
             try
             {
                 conn.Open();
-                sql = @"INSERT INTO [Order] (userID,productID,productDetailID,quantity,Price) VALUES (@userID,@productID,@productDetailID,@quantity,@Price)";
+                sql = @"INSERT INTO [Order] (userID,productID,productDetailID,quantity,Price,stus) VALUES (@userID,@productID,@productDetailID,@quantity,@Price,@stus)";
                 cmd = new SqlCommand(sql, conn);
                 
                 cmd.Parameters.Add("@userID", SqlDbType.Int).Value = b;
@@ -210,6 +253,8 @@ namespace QLBH_lastproject.ConnectSql
                 cmd.Parameters.Add("@productDetailID", SqlDbType.Int).Value = d;
                 cmd.Parameters.Add("@quantity", SqlDbType.Int).Value = e;
                 cmd.Parameters.Add("@Price", SqlDbType.Decimal).Value = f;
+                cmd.Parameters.Add("@stus", SqlDbType.NChar).Value = "a";
+
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Thông báo", "Thêm vào giỏ hàng thành công!", MessageBoxButtons.OK);
                 return true;
@@ -393,9 +438,17 @@ namespace QLBH_lastproject.ConnectSql
             try
             {
                 conn.Open();
-                sql = @"select * from [Order] where @OrderID = OrderID";
+                sql = @"SELECT o.OrderID , p.productName,ps.Ram ,ps.Rom,p.price,o.quantity,o.Price
+                FROM [Order] AS o 
+                LEFT JOIN [Product] AS p 
+                ON o.productID= p.productID 
+                LEFT JOIN [ProductDetail] AS ps
+                ON o.productDetailID= ps.productDetailID 
+                WHERE  @userID = o.userID AND @des != o.stus
+                ";
                 cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@OrderID", i);
+                cmd.Parameters.AddWithValue("@userID", i);
+                cmd.Parameters.AddWithValue("@des", "cart");
                 dt = new DataTable();
                 dt.Load(cmd.ExecuteReader());
                 return dt;
@@ -426,7 +479,46 @@ namespace QLBH_lastproject.ConnectSql
             }
             finally { conn.Close(); }
         }
-        
+        public Boolean DeleteOrder(int i)
+        {
+            try
+            {
+                conn.Open();
+                sql = @"DELETE FROM [Order] WHERE OrderID = @OrderID";
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@OrderID", i);
+                cmd.ExecuteNonQuery();
+                //MessageBox.Show("oki");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally { conn.Close(); }
+        }
+        public Boolean UpdateTotalOrder(int i, int id, int p)
+        {
+            try
+            {
+                conn.Open();
+                sql = @"UPDATE [Order] SET quantity = @quantity , Price = @Price WHERE @OrderID = OrderID";
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@quantity", i);
+                cmd.Parameters.AddWithValue("@Price", p);
+                cmd.Parameters.AddWithValue("@OrderID", id);
+
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally { conn.Close(); }
+        }
         public DataTable GetCartUser(int i) {
             try
             {
@@ -515,7 +607,7 @@ namespace QLBH_lastproject.ConnectSql
                 cmd.Parameters.Add("@cartStatusID", SqlDbType.Int).Value = d;
                 cmd.Parameters.Add("@orderID", SqlDbType.Int).Value = e;
                 cmd.ExecuteNonQuery();
-                //MessageBox.Show("Thông báo", "Thêm vào giỏ hàng thành công!", MessageBoxButtons.OK);
+                MessageBox.Show("Thông báo", "Cập nhật thành công!", MessageBoxButtons.OK);
                 return true;
               
             }
@@ -546,6 +638,27 @@ namespace QLBH_lastproject.ConnectSql
                 return -1;
             }
             finally { conn.Close(); }
+        }
+        public void UpdatestatusOrder(int i)
+        {
+            try
+            {
+                conn.Open();
+                sql = @"UPDATE [Order] SET stus = @des 
+                WHERE @OrderID = OrderID
+    
+";
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@OrderID", i);
+                cmd.Parameters.AddWithValue("@des", "cart");
+                MessageBox.Show("Thông báo", "Cập nhật cart thành công!", MessageBoxButtons.OK);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { conn.Close(); }   
         }
     }
 }

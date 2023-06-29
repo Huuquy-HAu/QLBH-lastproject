@@ -160,14 +160,17 @@ namespace QLBH_lastproject
             DataRow dr = sql.GetAccountonline();
             int userId = int.Parse(dr["userID"].ToString());
             sql.Insert(userId, productId, productId, 1, price);
+            //sql.UdeOred();
             //MessageBox.Show("Chưa có database!", "Thông báo", MessageBoxButtons.OK);
         }
         private void giohang_Click(object sender, EventArgs e)
         {
-            Cart cart = new Cart();
-            cart.Show();
-            cart.BringToFront();
             this.Hide();
+            Cart cart = new Cart();
+            cart.Show(this);
+            //cart.BringToFront();
+            
+
         }
 
 
