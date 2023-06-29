@@ -460,6 +460,27 @@ namespace QLBH_lastproject.ConnectSql
             }
             finally { conn.Close(); }
         }
+        public DataTable getallOrders(int i)
+        {
+            try
+            {
+                conn.Open();
+                sql = @"SELECT * FROM [Order] 
+                WHERE OrderID = @OrderID
+                ";
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@OrderID", i);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally { conn.Close(); }
+        }
         public DataTable SeclectOrder(int i)
         {
             try

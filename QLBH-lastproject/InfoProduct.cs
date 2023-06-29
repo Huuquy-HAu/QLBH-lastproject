@@ -27,7 +27,7 @@ namespace QLBH_lastproject
             {
                 label1.Text = "Thông tin đơn đặt";
 
-                dt = sql.getallOrder(n);
+                dt = sql.getallOrders(n);
                 dataRow = dt.Rows[0];
                 n = int.Parse(dataRow["productID"].ToString());
                 //price = (dataRow["Price"].ToString());
