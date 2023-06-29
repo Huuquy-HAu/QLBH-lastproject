@@ -188,7 +188,9 @@ namespace QLBH_lastproject
 
         private void trolai_Click_2(object sender, EventArgs e)
         {
-
+            this.Hide();
+            Mainmenu mainmenu = new Mainmenu();
+            mainmenu.Show();
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -230,20 +232,27 @@ namespace QLBH_lastproject
             }
             else
             {
-                Dathang dathang = new Dathang();
-                addCartItem(dathang);
-                conn = new SqlConnection(str);
-                conn.Open();
-                int selectedValue = int.Parse(label10.Text);
-                cmd.CommandText = "SELECT OrderID FROM [Order] WHERE OrderID = " + selectedValue;
-                cmd.ExecuteNonQuery();
-                loadData();
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
                     int orderId = int.Parse(selectedRow.Cells["OrderID"].Value.ToString());
-                   // dathang.UpdateOrderID(orderId);
+                    // dathang.UpdateOrderID(orderId);
+                    Dathang dathang = new Dathang();
+                    conn = new SqlConnection(str);
+                    conn.Open();
+                    SqlData sqlData = new SqlData();
+                    DataRow dataRow = sqlData.GetAccountonline();
+                    int userID = int.Parse(dataRow["UserID"].ToString()) ;
+                    sqlData.InserMualai(userID, DateTime.Now, orderId , 1);
+                    //cmd.CommandText = "INSERT INTO Cart(UserID, CreateAt , orderID, cartStatusID ) values () ";
+                    //cmd.ExecuteNonQuery();
+                    loadData();
+                    //addCartItem(dathang);
+                    Cart cart = new Cart();
+                    this.Hide();
+                    cart.ShowDialog();
                 }
+                
             }
         }
 

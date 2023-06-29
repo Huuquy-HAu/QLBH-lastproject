@@ -36,7 +36,8 @@ namespace QLBH_lastproject
                 {
                     //MessageBox.Show("Tài khoản này đang tạm khóa!\n Vui lòng liên hệ hotline: 0987503481 để được hỗ trợ", "Thông báo", MessageBoxButtons.OK);
                     MessageBox.Show("Tài khoản này đang tạm khóa!\n Vui lòng liên hệ A Hoàng để được hỗ trợ", "Thông báo", MessageBoxButtons.OK);
-                }else if (s == 4)
+                }
+                else if (s == 4)
                 {
                     this.Hide();
                     new Staff().Show();

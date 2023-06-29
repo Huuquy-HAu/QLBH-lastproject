@@ -57,7 +57,7 @@ namespace QLBH_lastproject
 
             // pictureBox.Size = new Size(140, 140);
             //n
-            FileStream fs = new System.IO.FileStream(@"C:\Users\ASUS\Source\Repos\QLBH-lastproject\QLBH-lastproject\img\" + n + ".bmp", FileMode.Open, FileAccess.Read);
+            FileStream fs = new System.IO.FileStream(@"D:\CS project\QLBH_Test\QLBH-lastproject\QLBH-lastproject\img\" + n + ".bmp", FileMode.Open, FileAccess.Read);
             pictureBox1.Image = Image.FromStream(fs);
             fs.Close();
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;

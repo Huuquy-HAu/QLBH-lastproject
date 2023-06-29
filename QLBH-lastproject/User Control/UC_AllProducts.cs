@@ -52,7 +52,7 @@ namespace WinFormsApp1
                 {
                     sqlCon.Open();
                 }
-                    loadData();
+                loadData();
             }
             catch (Exception ex)
             {
@@ -74,10 +74,10 @@ namespace WinFormsApp1
 
         void clearValue()
         {
-            txtProID.Clear();
-            txtName.Clear();
-            txtPrice.Clear();
-            txtDescription.Clear();
+            inpID.Clear();
+            inpProductName.Clear();
+            inpPrice.Clear();
+            inpDes.Clear();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -85,31 +85,30 @@ namespace WinFormsApp1
             int i;
             i = dataGridView1.CurrentRow.Index;
 
-            txtProID.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
-            txtName.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
-            txtDescription.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
-            txtPrice.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();
+            inpID.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
+            inpProductName.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
+            inpDes.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
+            inpPrice.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();
         }
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren(ValidationConstraints.Enabled) && validPrice())
-            {
-                sqlCmd = sqlCon.CreateCommand();
-                sqlCmd.CommandText = "INSERT INTO Product(productName, description, price) VALUES" +
-                "('" + txtName.Text + "','" + txtDescription.Text + "','" + txtPrice.Text + "')";
-                sqlCmd.ExecuteNonQuery();
-
-                loadData();
-                MessageBox.Show("Add successful!", "Message", MessageBoxButtons.OK);
-                clearValue();
-            }
-            else
+            int Pricenumber;
+            if (string.IsNullOrEmpty(inpProductName.Text) || string.IsNullOrEmpty(inpPrice.Text) || string.IsNullOrEmpty(inpDes.Text))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin hợp lệ!", "Message", MessageBoxButtons.OK);
+                return;
             }
 
 
+            sqlCmd = sqlCon.CreateCommand();
+            sqlCmd.CommandText = "INSERT INTO Product(productName, description, price) VALUES" +
+            "('" + inpProductName.Text + "','" + inpDes.Text + "','" + inpPrice.Text + "')";
+            sqlCmd.ExecuteNonQuery();
+
+            loadData();
+            MessageBox.Show("Add successful!", "Message", MessageBoxButtons.OK);
+            clearValue();
         }
 
         private void btnDelProduct_Click(object sender, EventArgs e)
@@ -119,7 +118,7 @@ namespace WinFormsApp1
             if (dialog == DialogResult.OK)
             {
                 sqlCmd = sqlCon.CreateCommand();
-                sqlCmd.CommandText = "DELETE FROM Product WHERE productName= '" + txtName.Text + "'";
+                sqlCmd.CommandText = "DELETE FROM Product WHERE productName= '" + inpProductName.Text + "'";
                 sqlCmd.ExecuteNonQuery();
 
                 loadData();
@@ -133,7 +132,7 @@ namespace WinFormsApp1
             if (ValidateChildren(ValidationConstraints.Enabled) && validPrice())
             {
                 sqlCmd = sqlCon.CreateCommand();
-                sqlCmd.CommandText = "update Product set productName = N'" + txtName.Text + "',description = N'" + txtDescription.Text + "',price = N'" + txtPrice.Text + "' where productID = '" + txtProID.Text + "'";
+                sqlCmd.CommandText = "update Product set productName = N'" + inpProductName.Text + "',description = N'" + inpDes.Text + "',price = N'" + inpPrice.Text + "' where productID = '" + inpID.Text + "'";
                 sqlCmd.ExecuteNonQuery();
 
                 loadData();
@@ -143,24 +142,24 @@ namespace WinFormsApp1
 
         }
 
-        private void txtName_Validating(object sender, CancelEventArgs e)
+        private void inpProductName_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtName.Text))
+            if (string.IsNullOrWhiteSpace(inpProductName.Text))
             {
                 e.Cancel = true;
-                txtName.Focus();
-                errorProvider1.SetError(txtName, "Please enter product name!");
+                inpProductName.Focus();
+                errorProvider1.SetError(inpProductName, "Please enter product name!");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider1.SetError(txtName, null);
+                errorProvider1.SetError(inpProductName, null);
             }
         }
 
         private bool validPrice()
         {
-            string price = txtPrice.Text;
+            string price = inpPrice.Text;
             string priceN = price.Substring(0, price.Length - 1);
             int priceNum = 0;
             if (price.Length > 0)
@@ -169,40 +168,37 @@ namespace WinFormsApp1
                 if (priceNum < 0)
                 {
                     MessageBox.Show("Product price must be positive!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtPrice.Focus();
                     return false;
                 }
             }
             return true;
         }
 
-        private void txtPrice_Validating(object sender, CancelEventArgs e)
+        private void inpPrice_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtPrice.Text))
+            if (string.IsNullOrWhiteSpace(inpPrice.Text))
             {
                 e.Cancel = true;
-                txtPrice.Focus();
-                errorProvider1.SetError(txtPrice, "Please enter product price!");
+                errorProvider1.SetError(inpPrice, "Please enter product price!");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider1.SetError(txtName, null);
+                errorProvider1.SetError(inpProductName, null);
             }
         }
 
-        private void txtDescription_Validating(object sender, CancelEventArgs e)
+        private void inpDes_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtDescription.Text))
+            if (string.IsNullOrWhiteSpace(inpDes.Text))
             {
                 e.Cancel = true;
-                txtDescription.Focus();
-                errorProvider1.SetError(txtDescription, "Please enter product description!");
+                errorProvider1.SetError(inpDes, "Please enter product description!");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider1.SetError(txtName, null);
+                errorProvider1.SetError(inpProductName, null);
             }
         }
     }

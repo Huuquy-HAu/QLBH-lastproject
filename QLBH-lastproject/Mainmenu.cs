@@ -108,7 +108,7 @@ namespace QLBH_lastproject
         }
         private void ShowInfproduct(string n)
         {
-            InfoProduct ifo = new InfoProduct(int.Parse(n), "info",0);
+            InfoProduct ifo = new InfoProduct(int.Parse(n), "info", 0);
             ////flowLayoutPanel1.Controls.Clear();
             ifo.Show();
             ifo.BringToFront();

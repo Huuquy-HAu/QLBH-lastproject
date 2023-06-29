@@ -31,9 +31,9 @@
             dataGridView1 = new DataGridView();
             pnlUserDetail = new Panel();
             cbRoleUser = new ComboBox();
-            txtAddressUser = new TextBox();
-            txtPhoneUser = new TextBox();
-            txtNameUser = new TextBox();
+            inpPassword = new TextBox();
+            inpUserName = new TextBox();
+            inpID = new TextBox();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
@@ -56,17 +56,20 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(440, 70);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(693, 395);
             dataGridView1.TabIndex = 1;
+            dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // pnlUserDetail
             // 
             pnlUserDetail.BackColor = Color.WhiteSmoke;
             pnlUserDetail.Controls.Add(cbRoleUser);
-            pnlUserDetail.Controls.Add(txtAddressUser);
-            pnlUserDetail.Controls.Add(txtPhoneUser);
-            pnlUserDetail.Controls.Add(txtNameUser);
+            pnlUserDetail.Controls.Add(inpPassword);
+            pnlUserDetail.Controls.Add(inpUserName);
+            pnlUserDetail.Controls.Add(inpID);
             pnlUserDetail.Controls.Add(label6);
             pnlUserDetail.Controls.Add(label5);
             pnlUserDetail.Controls.Add(label4);
@@ -81,69 +84,77 @@
             cbRoleUser.FlatStyle = FlatStyle.Flat;
             cbRoleUser.Font = new Font("Century Gothic", 15F, FontStyle.Regular, GraphicsUnit.Point);
             cbRoleUser.FormattingEnabled = true;
-            cbRoleUser.ItemHeight = 23;
-            cbRoleUser.Items.AddRange(new object[] { "Quản trị viên", "Người dùng" });
+            cbRoleUser.ItemHeight = 31;
             cbRoleUser.Location = new Point(196, 247);
             cbRoleUser.Name = "cbRoleUser";
-            cbRoleUser.Size = new Size(149, 31);
+            cbRoleUser.Size = new Size(149, 39);
             cbRoleUser.TabIndex = 9;
             // 
-            // txtAddressUser
+            // inpPassword
             // 
-            txtAddressUser.Location = new Point(196, 173);
-            txtAddressUser.Name = "txtAddressUser";
-            txtAddressUser.Size = new Size(149, 43);
-            txtAddressUser.TabIndex = 8;
+            inpPassword.Font = new Font("Microsoft JhengHei", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            inpPassword.Location = new Point(196, 173);
+            inpPassword.Name = "inpPassword";
+            inpPassword.Size = new Size(149, 38);
+            inpPassword.TabIndex = 8;
             // 
-            // txtPhoneUser
+            // inpUserName
             // 
-            txtPhoneUser.Location = new Point(196, 105);
-            txtPhoneUser.Name = "txtPhoneUser";
-            txtPhoneUser.Size = new Size(149, 43);
-            txtPhoneUser.TabIndex = 7;
+            inpUserName.Enabled = false;
+            inpUserName.Font = new Font("Microsoft JhengHei", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inpUserName.Location = new Point(196, 105);
+            inpUserName.Name = "inpUserName";
+            inpUserName.Size = new Size(149, 43);
+            inpUserName.TabIndex = 7;
             // 
-            // txtNameUser
+            // inpID
             // 
-            txtNameUser.Location = new Point(196, 36);
-            txtNameUser.Name = "txtNameUser";
-            txtNameUser.Size = new Size(149, 43);
-            txtNameUser.TabIndex = 6;
+            inpID.Enabled = false;
+            inpID.Font = new Font("Microsoft JhengHei", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            inpID.Location = new Point(196, 36);
+            inpID.Name = "inpID";
+            inpID.Size = new Size(149, 38);
+            inpID.TabIndex = 6;
             // 
             // label6
             // 
             label6.AutoSize = true;
+            label6.Font = new Font("Microsoft JhengHei", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
             label6.Location = new Point(15, 247);
             label6.Name = "label6";
-            label6.Size = new Size(115, 34);
+            label6.Size = new Size(118, 35);
             label6.TabIndex = 4;
             label6.Text = "Chức vụ";
             // 
             // label5
             // 
             label5.AutoSize = true;
+            label5.Font = new Font("Microsoft JhengHei", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
             label5.Location = new Point(13, 173);
             label5.Name = "label5";
-            label5.Size = new Size(101, 34);
+            label5.Size = new Size(147, 35);
             label5.TabIndex = 3;
-            label5.Text = "Địa chỉ";
+            label5.Text = "Mật khẩu ";
             // 
             // label4
             // 
             label4.AutoSize = true;
+            label4.Font = new Font("Microsoft JhengHei", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label4.Location = new Point(13, 105);
             label4.Name = "label4";
-            label4.Size = new Size(181, 34);
+            label4.Size = new Size(160, 29);
             label4.TabIndex = 2;
-            label4.Text = "Số điện thoại";
+            label4.Text = "Tên tài khoản";
             // 
             // label3
             // 
             label3.AutoSize = true;
+            label3.Font = new Font("Microsoft JhengHei", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label3.Location = new Point(15, 36);
             label3.Name = "label3";
-            label3.Size = new Size(61, 34);
+            label3.Size = new Size(86, 29);
             label3.TabIndex = 1;
-            label3.Text = "Tên";
+            label3.Text = "UserID";
             // 
             // pnlBtnUser
             // 
@@ -159,35 +170,38 @@
             // btnDelOrder
             // 
             btnDelOrder.FlatStyle = FlatStyle.Flat;
-            btnDelOrder.Font = new Font("Microsoft JhengHei", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDelOrder.Font = new Font("Microsoft JhengHei", 9F, FontStyle.Regular, GraphicsUnit.Point);
             btnDelOrder.Location = new Point(248, 16);
             btnDelOrder.Name = "btnDelOrder";
             btnDelOrder.Size = new Size(97, 32);
             btnDelOrder.TabIndex = 2;
             btnDelOrder.Text = "Xóa";
             btnDelOrder.UseVisualStyleBackColor = true;
+            btnDelOrder.Click += btnDelOrder_Click;
             // 
             // btnUpdateUser
             // 
             btnUpdateUser.FlatStyle = FlatStyle.Flat;
-            btnUpdateUser.Font = new Font("Microsoft JhengHei", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            btnUpdateUser.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnUpdateUser.Location = new Point(125, 16);
             btnUpdateUser.Name = "btnUpdateUser";
             btnUpdateUser.Size = new Size(95, 32);
             btnUpdateUser.TabIndex = 1;
             btnUpdateUser.Text = "Sửa";
             btnUpdateUser.UseVisualStyleBackColor = true;
+            btnUpdateUser.Click += btnUpdateUser_Click;
             // 
             // btnAddUser
             // 
             btnAddUser.FlatStyle = FlatStyle.Flat;
-            btnAddUser.Font = new Font("Microsoft JhengHei", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAddUser.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnAddUser.Location = new Point(15, 16);
             btnAddUser.Name = "btnAddUser";
             btnAddUser.Size = new Size(85, 32);
             btnAddUser.TabIndex = 0;
             btnAddUser.Text = "Thêm";
             btnAddUser.UseVisualStyleBackColor = true;
+            btnAddUser.Click += btnAddUser_Click;
             // 
             // panel1
             // 
@@ -218,7 +232,7 @@
             label1.ForeColor = Color.WhiteSmoke;
             label1.Location = new Point(15, 16);
             label1.Name = "label1";
-            label1.Size = new Size(240, 34);
+            label1.Size = new Size(311, 43);
             label1.TabIndex = 5;
             label1.Text = "Trang người dùng";
             // 
@@ -246,9 +260,9 @@
         private Panel pnlUserDetail;
         private Panel pnlBtnUser;
         private ComboBox cbRoleUser;
-        private TextBox txtAddressUser;
-        private TextBox txtPhoneUser;
-        private TextBox txtNameUser;
+        private TextBox inpPassword;
+        private TextBox inpUserName;
+        private TextBox inpID;
         private Label label6;
         private Label label5;
         private Label label4;

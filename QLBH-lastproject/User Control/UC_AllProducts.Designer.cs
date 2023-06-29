@@ -37,11 +37,7 @@
             clPrice = new DataGridViewTextBoxColumn();
             pnlProductDetail = new Panel();
             label4 = new Label();
-            txtProID = new TextBox();
             label2 = new Label();
-            txtDescription = new TextBox();
-            txtPrice = new TextBox();
-            txtName = new TextBox();
             label6 = new Label();
             label5 = new Label();
             label3 = new Label();
@@ -52,6 +48,10 @@
             panel1 = new Panel();
             btnClose = new Button();
             errorProvider1 = new ErrorProvider(components);
+            inpID = new TextBox();
+            inpProductName = new TextBox();
+            inpPrice = new TextBox();
+            inpDes = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             pnlProductDetail.SuspendLayout();
             pnlBtn.SuspendLayout();
@@ -121,12 +121,12 @@
             // pnlProductDetail
             // 
             pnlProductDetail.BackColor = Color.WhiteSmoke;
+            pnlProductDetail.Controls.Add(inpDes);
+            pnlProductDetail.Controls.Add(inpPrice);
+            pnlProductDetail.Controls.Add(inpProductName);
+            pnlProductDetail.Controls.Add(inpID);
             pnlProductDetail.Controls.Add(label4);
-            pnlProductDetail.Controls.Add(txtProID);
             pnlProductDetail.Controls.Add(label2);
-            pnlProductDetail.Controls.Add(txtDescription);
-            pnlProductDetail.Controls.Add(txtPrice);
-            pnlProductDetail.Controls.Add(txtName);
             pnlProductDetail.Controls.Add(label6);
             pnlProductDetail.Controls.Add(label5);
             pnlProductDetail.Controls.Add(label3);
@@ -145,15 +145,6 @@
             label4.TabIndex = 12;
             label4.Text = "$";
             // 
-            // txtProID
-            // 
-            txtProID.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtProID.Location = new Point(120, 52);
-            txtProID.Name = "txtProID";
-            txtProID.ReadOnly = true;
-            txtProID.Size = new Size(134, 34);
-            txtProID.TabIndex = 11;
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -163,33 +154,6 @@
             label2.Size = new Size(70, 25);
             label2.TabIndex = 10;
             label2.Text = "Mã SP";
-            // 
-            // txtDescription
-            // 
-            txtDescription.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDescription.Location = new Point(120, 233);
-            txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(134, 34);
-            txtDescription.TabIndex = 9;
-            txtDescription.Validating += txtDescription_Validating;
-            // 
-            // txtPrice
-            // 
-            txtPrice.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtPrice.Location = new Point(120, 169);
-            txtPrice.Name = "txtPrice";
-            txtPrice.Size = new Size(134, 34);
-            txtPrice.TabIndex = 8;
-            txtPrice.Validating += txtPrice_Validating;
-            // 
-            // txtName
-            // 
-            txtName.Font = new Font("Microsoft JhengHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtName.Location = new Point(120, 106);
-            txtName.Name = "txtName";
-            txtName.Size = new Size(134, 34);
-            txtName.TabIndex = 6;
-            txtName.Validating += txtName_Validating;
             // 
             // label6
             // 
@@ -301,6 +265,39 @@
             // 
             errorProvider1.ContainerControl = this;
             // 
+            // inpID
+            // 
+            inpID.Enabled = false;
+            inpID.Font = new Font("Microsoft JhengHei", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            inpID.Location = new Point(104, 49);
+            inpID.Name = "inpID";
+            inpID.Size = new Size(165, 38);
+            inpID.TabIndex = 13;
+            // 
+            // inpProductName
+            // 
+            inpProductName.Font = new Font("Microsoft JhengHei", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            inpProductName.Location = new Point(104, 109);
+            inpProductName.Name = "inpProductName";
+            inpProductName.Size = new Size(165, 38);
+            inpProductName.TabIndex = 14;
+            // 
+            // inpPrice
+            // 
+            inpPrice.Font = new Font("Microsoft JhengHei", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            inpPrice.Location = new Point(104, 166);
+            inpPrice.Name = "inpPrice";
+            inpPrice.Size = new Size(165, 38);
+            inpPrice.TabIndex = 15;
+            // 
+            // inpDes
+            // 
+            inpDes.Font = new Font("Microsoft JhengHei", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            inpDes.Location = new Point(104, 230);
+            inpDes.Name = "inpDes";
+            inpDes.Size = new Size(165, 38);
+            inpDes.TabIndex = 16;
+            // 
             // UC_AllProducts
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -330,9 +327,6 @@
         private DataGridView dataGridView1;
         private Panel pnlProductDetail;
         private Panel pnlBtn;
-        private TextBox txtDescription;
-        private TextBox txtPrice;
-        private TextBox txtName;
         private Label label6;
         private Label label5;
         private Label label3;
@@ -341,7 +335,6 @@
         private Button btnAddProduct;
         private Panel panel1;
         private Button btnClose;
-        private TextBox txtProID;
         private Label label2;
         private ErrorProvider errorProvider1;
         private Label label4;
@@ -349,5 +342,9 @@
         private DataGridViewTextBoxColumn clProductName;
         private DataGridViewTextBoxColumn clDescription;
         private DataGridViewTextBoxColumn clPrice;
+        private TextBox inpDes;
+        private TextBox inpPrice;
+        private TextBox inpProductName;
+        private TextBox inpID;
     }
 }

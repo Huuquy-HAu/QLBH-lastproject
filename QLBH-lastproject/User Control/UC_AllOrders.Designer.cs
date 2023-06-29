@@ -31,11 +31,11 @@
             label1 = new Label();
             dataGridView1 = new DataGridView();
             panel1 = new Panel();
+            button4 = new Button();
             button3 = new Button();
             button2 = new Button();
             button1 = new Button();
             panel2 = new Panel();
-            button4 = new Button();
             btnConfirm = new Button();
             panel3 = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -51,7 +51,7 @@
             label1.ForeColor = Color.WhiteSmoke;
             label1.Location = new Point(13, 14);
             label1.Name = "label1";
-            label1.Size = new Size(214, 34);
+            label1.Size = new Size(277, 43);
             label1.TabIndex = 0;
             label1.Text = "Trang đơn hàng";
             // 
@@ -64,6 +64,7 @@
             dataGridView1.Location = new Point(39, 178);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(1095, 302);
@@ -82,8 +83,20 @@
             panel1.Size = new Size(928, 92);
             panel1.TabIndex = 2;
             // 
+            // button4
+            // 
+            button4.Font = new Font("Microsoft JhengHei", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            button4.Location = new Point(693, 30);
+            button4.Name = "button4";
+            button4.Size = new Size(200, 40);
+            button4.TabIndex = 5;
+            button4.Text = "Hoàn thành";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // button3
             // 
+            button3.Font = new Font("Microsoft JhengHei", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             button3.Location = new Point(496, 30);
             button3.Name = "button3";
             button3.Size = new Size(155, 40);
@@ -94,6 +107,7 @@
             // 
             // button2
             // 
+            button2.Font = new Font("Microsoft JhengHei", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             button2.Location = new Point(276, 30);
             button2.Name = "button2";
             button2.Size = new Size(174, 40);
@@ -104,6 +118,7 @@
             // 
             // button1
             // 
+            button1.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button1.Location = new Point(53, 30);
             button1.Name = "button1";
             button1.Size = new Size(189, 40);
@@ -120,16 +135,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(161, 92);
             panel2.TabIndex = 3;
-            // 
-            // button4
-            // 
-            button4.Location = new Point(693, 30);
-            button4.Name = "button4";
-            button4.Size = new Size(200, 40);
-            button4.TabIndex = 5;
-            button4.Text = "Hoàn thành";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
             // 
             // btnConfirm
             // 
